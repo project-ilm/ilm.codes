@@ -10,4 +10,6 @@ full-stack AGI capability via universal transliteration.
 - GitHub Pages
 - GPL v2 only
 
-Copyright © Abhishek
+Copyright © 2025 Abhishek Choudhary
+
+https://archive.is/LBsKO 2 Jan 2026 12:45:57 UTC
