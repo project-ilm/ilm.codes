@@ -1,13 +1,478 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>ILM Map</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project ILM | Integrative Linguistic Multiscript Map</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f4f6f7;
+            --modal-bg: #ffffff;
+            --code-bg: #282c34;
+            --code-text: #abb2bf;
+        }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        
+        /* Map Container */
+        #map { height: 100vh; width: 100vw; z-index: 1; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: var(--modal-bg); width: 90%; max-width: 1000px; height: 90vh;
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .modal-header {
+            padding: 15px 25px; background: var(--primary); color: white;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-body {
+            padding: 25px; overflow-y: auto; flex-grow: 1;
+        }
+        .close-btn {
+            background: none; border: none; color: white; font-size: 24px; cursor: pointer;
+        }
+
+        /* Sections */
+        .section-box {
+            border: 1px solid #ddd; border-radius: 6px; padding: 20px; margin-bottom: 25px;
+            background: white;
+        }
+        h3 { margin-top: 0; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; display: inline-block; }
+
+        /* Code Editors */
+        .editor-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .code-area {
+            width: 100%; height: 200px; background: var(--code-bg); color: var(--code-text);
+            font-family: 'Courier New', Courier, monospace; padding: 15px;
+            border-radius: 4px; border: none; resize: vertical; box-sizing: border-box;
+        }
+        .output-log {
+            background: #f0f0f0; color: #333; font-family: monospace;
+            padding: 10px; border-left: 4px solid var(--accent); margin-top: 10px; min-height: 40px;
+        }
+        .btn {
+            background: var(--accent); color: white; border: none; padding: 10px 20px;
+            border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px;
+        }
+        .btn:hover { background: #2980b9; }
+
+        /* Mapping Table */
+        .keyword-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .keyword-table th, .keyword-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .keyword-table th { background-color: var(--bg); }
+
+        /* Logo */
+        #turtle-canvas { background: white; border: 2px solid #ccc; display: block; margin-top: 15px; }
+        .logo-controls { margin-bottom: 15px; background: #eef; padding: 10px; border-radius: 4px; }
+        .localized-cmd { font-weight: bold; color: var(--accent); }
+    </style>
 </head>
 <body>
-<h1>ILM Map</h1>
-<p>Multiscript semantic coverage across full stack.</p>
-<script src="ilm.js"></script>
+
+    <div id="map"></div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 style="margin:0" id="lang-title">Language</h2>
+                    <small id="lang-subtitle">Script Identity</small>
+                </div>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="section-box">
+                    <h3>A. Language Identity</h3>
+                    <p><strong>Code:</strong> <span id="id-code"></span></p>
+                    <p><strong>Script System:</strong> Perso-Arabic / Ajami / Jawi / Derived</p>
+                    <p><em>Data fetched dynamically from live CSV schema.</em></p>
+                </div>
+
+                <div class="section-box">
+                    <h3>B. Executable Localized JavaScript</h3>
+                    <p>Write standard logic using <strong id="lang-name-ref">localized</strong> keywords. The browser executes this by mapping it to native ECMAScript at runtime.</p>
+                    
+                    <div class="editor-grid">
+                        <div>
+                            <label><strong>Input (Localized Script):</strong></label>
+                            <textarea id="input-code" class="code-area" spellcheck="false"></textarea>
+                            <button class="btn" onclick="insertSampleCode()">Insert Localized Sample</button>
+                        </div>
+                        <div>
+                            <label><strong>Transpiled (Native JS):</strong></label>
+                            <textarea id="transpiled-code" class="code-area" readonly></textarea>
+                            <button class="btn" onclick="runCode()">EXECUTE &raquo;</button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top:15px;">
+                        <label><strong>Console Output:</strong></label>
+                        <div id="console-output" class="output-log">Ready...</div>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <h3>D. LOGO Mini-Interpreter</h3>
+                    <div class="logo-controls">
+                        <p><strong>Localized Vocabulary:</strong></p>
+                        <ul id="logo-legend">
+                            </ul>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" id="logo-input" placeholder="Type localized command (e.g., forward 50)" style="flex-grow:1; padding:10px; font-size:16px;">
+                        <button class="btn" style="margin-top:0;" onclick="runLogo()">Draw</button>
+                        <button class="btn" style="margin-top:0; background:#7f8c8d;" onclick="clearLogo()">Reset</button>
+                    </div>
+                    <canvas id="turtle-canvas" width="600" height="300"></canvas>
+                </div>
+
+                <div class="section-box">
+                    <h3>C. Keyword Mapping Viewer</h3>
+                    <div style="max-height: 250px; overflow-y: auto;">
+                        <table class="keyword-table">
+                            <thead>
+                                <tr>
+                                    <th>Canonical JS</th>
+                                    <th>Category</th>
+                                    <th>Localized Form</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mapping-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script>
+    // --- CONFIGURATION ---
+    const CSV_URL = 'https://raw.githubusercontent.com/project-ilm/ilm.codes/refs/heads/main/data/ilm-js-keywords-mapping.csv';
+    
+    // Geographical centers for the 41 ILM languages
+    const LOCATIONS = {
+        'ar': [24.0, 45.0], 'ur': [30.37, 69.34], 'fa': [32.42, 53.68], 'prs': [34.55, 69.20], 'haz': [33.5, 67.0],
+        'sd': [25.39, 68.35], 'pa_sh': [31.52, 74.35], 'skr': [29.35, 71.69], 'bal': [27.72, 65.16], 'brh': [29.0, 66.5],
+        'hnd': [34.0, 73.2], 'ks': [34.08, 74.79], 'khw': [35.85, 71.78], 'scl': [35.3, 75.6], 'bft': [35.4, 75.2],
+        'wbl': [36.7, 73.0], 'ku_sor': [35.56, 45.41], 'ku_kmr_pa': [37.3, 43.5], 'ota': [41.0, 28.9], 'ug': [41.1, 85.0],
+        'ha_aj': [12.0, 8.5], 'sw_aj': [-6.36, 34.88], 'wo_aj': [14.69, -17.44], 'ff_aj': [12.6, -8.0], 'mnk_aj': [12.5, -11.0],
+        'jrb': [31.76, 35.21], 'jpr': [32.65, 51.66], 'tg_pa': [38.55, 68.78], 'lrc': [33.5, 48.3], 'mzn': [36.5, 53.0],
+        'glk': [37.2, 49.6], 'tat': [55.79, 49.1], 'syr_gar': [36.2, 37.1], 'ms_jawi': [3.13, 101.68], 'azb': [38.0, 46.0],
+        'kk_arab': [48.0, 66.9], 'ky_arab': [42.87, 74.59], 'tk_arab': [37.96, 58.32], 'so_arab': [5.15, 46.19], 
+        'kr_arab': [13.0, 13.0], 'rhg': [20.15, 92.9]
+    };
+
+    let globalData = [];
+    let currentLang = null;
+    let map = null;
+    let turtleState = { x: 300, y: 150, angle: 0 }; // Logo Turtle State
+
+    // --- INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+        initMap();
+        fetchData();
+    }
+
+    function initMap() {
+        map = L.map('map').setView([25, 55], 3);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    }
+
+    function fetchData() {
+        Papa.parse(CSV_URL, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                globalData = results.data;
+                console.log("Data loaded:", globalData.length, "rows");
+                populateMapMarkers();
+            },
+            error: function(err) {
+                alert("Failed to fetch CSV data. Check console.");
+                console.error(err);
+            }
+        });
+    }
+
+    function populateMapMarkers() {
+        // Iterate over keys in our geolocation table
+        Object.keys(LOCATIONS).forEach(langCode => {
+            // Check if this language actually exists in the CSV columns
+            if (globalData.length > 0 && !globalData[0].hasOwnProperty(langCode)) {
+                console.warn(`Language column '${langCode}' not found in CSV.`);
+                return;
+            }
+
+            const latLng = LOCATIONS[langCode];
+            const marker = L.marker(latLng).addTo(map);
+            
+            marker.bindTooltip(langCode.toUpperCase(), {permanent: false, direction: 'top'});
+            marker.on('click', () => openModal(langCode));
+        });
+    }
+
+    // --- MODAL LOGIC ---
+    function openModal(langCode) {
+        currentLang = langCode;
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('lang-title').textContent = langCode.toUpperCase();
+        document.getElementById('lang-name-ref').textContent = langCode.toUpperCase();
+        document.getElementById('id-code').textContent = langCode;
+        
+        // Reset editors
+        document.getElementById('input-code').value = '';
+        document.getElementById('transpiled-code').value = '';
+        document.getElementById('console-output').textContent = 'Ready...';
+        
+        populateMappingTable(langCode);
+        setupLogo(langCode);
+    }
+
+    function closeModal() {
+        document.getElementById('modal-overlay').style.display = 'none';
+    }
+
+    // --- KEYWORD MAPPING VIEWER ---
+    function populateMappingTable(langCode) {
+        const tbody = document.getElementById('mapping-tbody');
+        tbody.innerHTML = '';
+        
+        globalData.forEach(row => {
+            if (!row.js_keyword) return;
+            const tr = document.createElement('tr');
+            const canonical = row.js_keyword;
+            const category = row.category || 'General';
+            const localized = row[langCode] || '-';
+            
+            tr.innerHTML = `
+                <td style="font-family:monospace; color:#d63384;">${canonical}</td>
+                <td>${category}</td>
+                <td style="font-family:sans-serif; font-weight:bold;">${localized}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // --- EXECUTABLE JS ENGINE (Transpiler) ---
+    
+    // Helper to get localized word for a specific JS keyword
+    function getLocalizedKeyword(canonical, lang) {
+        const row = globalData.find(r => r.js_keyword === canonical);
+        return row && row[lang] ? row[lang] : canonical;
+    }
+
+    function insertSampleCode() {
+        // Dynamically build a sample script using the localized keywords
+        const _var = getLocalizedKeyword('var', currentLang);
+        const _function = getLocalizedKeyword('function', currentLang);
+        const _return = getLocalizedKeyword('return', currentLang);
+        const _if = getLocalizedKeyword('if', currentLang);
+        
+        // Note: For demonstration, we assume standard operators (), {}, +, > are universal,
+        // but the keywords are localized.
+        
+        const sample = 
+`// Localized JS Demo in ${currentLang.toUpperCase()}
+
+${_function} hello(x) {
+    ${_var} msg = "Hello World ";
+    ${_if} (x > 5) {
+        ${_return} msg + x;
+    }
+    ${_return} "Too small";
+}
+
+hello(10);`;
+
+        document.getElementById('input-code').value = sample;
+    }
+
+    function runCode() {
+        const input = document.getElementById('input-code').value;
+        const logBox = document.getElementById('console-output');
+        
+        try {
+            // 1. Lexical Rewrite (Transpilation)
+            const transpiled = transpileToCanonical(input, currentLang);
+            document.getElementById('transpiled-code').value = transpiled;
+            
+            // 2. Execution (Eval safety sandbox)
+            logBox.textContent = "";
+            
+            // Capture console.log
+            const originalLog = console.log;
+            const logs = [];
+            console.log = (...args) => {
+                logs.push(args.join(' '));
+            };
+            
+            // Eval the result
+            const result = eval(transpiled);
+            
+            // Restore console
+            console.log = originalLog;
+            
+            // Display Output
+            if (logs.length > 0) logBox.textContent += logs.join('\n') + '\n';
+            if (result !== undefined) logBox.textContent += `>> ${result}`;
+            
+        } catch (e) {
+            logBox.textContent = `Error: ${e.message}`;
+        }
+    }
+
+    function transpileToCanonical(source, lang) {
+        let result = source;
+        
+        // 1. Filter rows that have a localization for this lang
+        const mapList = globalData.filter(row => row.js_keyword && row[lang]);
+        
+        // 2. Sort by length DESCENDING to avoid partial matches (e.g. replacing 'if' inside 'iframe')
+        mapList.sort((a, b) => b[lang].length - a[lang].length);
+        
+        // 3. Replace
+        mapList.forEach(row => {
+            const local = row[lang];
+            const canon = row.js_keyword;
+            
+            // Escape regex characters in local string
+            const escapedLocal = local.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            
+            // Use word boundary \b if possible, but for non-latin scripts, boundaries are tricky.
+            // Strategy: Global replace.
+            const regex = new RegExp(escapedLocal, 'g'); 
+            result = result.replace(regex, canon);
+        });
+        
+        return result;
+    }
+
+    // --- LOCALIZED LOGO ENGINE ---
+    
+    let logoVocabulary = {};
+
+    function setupLogo(lang) {
+        clearLogo();
+        const legend = document.getElementById('logo-legend');
+        legend.innerHTML = '';
+        
+        // Define core Logo concepts and try to find them in the CSV.
+        // If the CSV is purely JS keywords, we might need to rely on 'forward', 'back' etc being present,
+        // or map to JS keywords that approximate them.
+        // Assuming CSV contains rows for: forward, back, left, right OR standard geometric terms.
+        
+        // Fallback: If 'forward' isn't in CSV, we use English, but ideally it is.
+        const cmds = ['forward', 'back', 'left', 'right'];
+        logoVocabulary = {};
+
+        cmds.forEach(cmd => {
+            const loc = getLocalizedKeyword(cmd, lang);
+            logoVocabulary[cmd] = loc; // Store mapping: forward -> [Localized]
+            
+            const li = document.createElement('li');
+            li.innerHTML = `${cmd.toUpperCase()} = <span class="localized-cmd">${loc}</span>`;
+            legend.appendChild(li);
+        });
+    }
+
+    function clearLogo() {
+        const canvas = document.getElementById('turtle-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        turtleState = { x: 300, y: 150, angle: -Math.PI/2 }; // Point Up
+        
+        // Draw Turtle
+        drawTurtleIcon(ctx);
+    }
+
+    function drawTurtleIcon(ctx) {
+        ctx.save();
+        ctx.translate(turtleState.x, turtleState.y);
+        ctx.rotate(turtleState.angle);
+        ctx.fillStyle = '#27ae60';
+        ctx.beginPath();
+        ctx.moveTo(10, 0);
+        ctx.lineTo(-5, 5);
+        ctx.lineTo(-5, -5);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function runLogo() {
+        const input = document.getElementById('logo-input').value.toLowerCase();
+        const canvas = document.getElementById('turtle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Parse: [Command] [Value]
+        const tokens = input.split(' ');
+        if (tokens.length < 2) return;
+        
+        const userCmd = tokens[0];
+        const val = parseInt(tokens[1]);
+        
+        // Reverse Lookup: Find which canonical command matches userCmd
+        let canonicalCmd = null;
+        for (const [key, localized] of Object.entries(logoVocabulary)) {
+            if (localized.toLowerCase() === userCmd) {
+                canonicalCmd = key;
+                break;
+            }
+        }
+        
+        if (!canonicalCmd) {
+            alert(`Unknown command: ${userCmd}`);
+            return;
+        }
+
+        // Execute Geometry
+        ctx.beginPath();
+        ctx.moveTo(turtleState.x, turtleState.y);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#2c3e50";
+
+        if (canonicalCmd === 'forward') {
+            turtleState.x += Math.cos(turtleState.angle) * val;
+            turtleState.y += Math.sin(turtleState.angle) * val;
+            ctx.lineTo(turtleState.x, turtleState.y);
+            ctx.stroke();
+        } else if (canonicalCmd === 'back') {
+            turtleState.x -= Math.cos(turtleState.angle) * val;
+            turtleState.y -= Math.sin(turtleState.angle) * val;
+            ctx.lineTo(turtleState.x, turtleState.y);
+            ctx.stroke();
+        } else if (canonicalCmd === 'left') {
+            turtleState.angle -= (val * Math.PI / 180);
+        } else if (canonicalCmd === 'right') {
+            turtleState.angle += (val * Math.PI / 180);
+        }
+        
+        // Redraw Turtle Icon
+        // (For a real persistent canvas we'd use layers, here we just draw over)
+        drawTurtleIcon(ctx);
+    }
+
+</script>
+
 </body>
 </html>
