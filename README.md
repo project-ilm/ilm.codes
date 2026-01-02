@@ -12,7 +12,9 @@ full-stack AGI capability via universal transliteration.
 
 Copyright © 2025 Abhishek Choudhary
 
-Archival
+1st Archivals
 ilm.codes site https://archive.is/LBsKO 2 Jan 2026 12:45:57 UTC
 
 ilm js mapping https://archive.is/nWous 2 Jan 2026 13:06:26 UTC
+
+ILM Global Map https://archive.is/lf25G
