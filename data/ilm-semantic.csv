@@ -1,0 +1,8 @@
+key,layer,type
+ENTITY,core,semantic
+INTENT,core,semantic
+ACTION,core,semantic
+STATE,core,semantic
+CONSTRAINT,core,semantic
+RELATION,core,semantic
+CONTEXT,core,semantic
