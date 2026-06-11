@@ -1,35 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>ILM</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Integrative Linguistic Multiscript | The Reversible Substrate, 2004→AGI</title>
+<meta name="description" content="Reversible canonical substrate beneath the world's writing systems. Hindawi Programming System (2004) to the AGI stack. Romenagri GPL 2003.">
 <style>
-body{margin:0;background:#000;color:#fff;font-family:monospace;
-display:flex;align-items:center;justify-content:center;height:100vh}
-#wrap{text-align:center;animation:fade 2s}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-</style>
-</head>
-<body>
-<div id="wrap">
-<h1>ILM</h1>
-<p>Integrative Linguistic Multiscript</p>
-<p id="date"></p>
-<p>BETA LAUNCH</p>
-<p id="count"></p>
-</div>
-<script>
-const d=new Date().toDateString();
-document.getElementById("date").innerText=d;
-let c=10;
-const el=document.getElementById("count");
-el.innerText="Entering ILM Map in "+c;
-const t=setInterval(()=>{
-c--;
-el.innerText="Entering ILM Map in "+c;
-if(c===0){clearInterval(t);location.href="map.html";}
-},1000);
-</script>
-</body>
-</html>
+:root{--ink:#181410;--acc:#7a1f1f;--gold:#9a6a1f;--bg:#faf7f1;--card:#fff;--line:#e6dfd2}
+*{box-sizing:border-box}body{font:16px/1.65 Georgia,serif;color:var(--ink);background:var(--bg);margin:0}
+header{background:linear-gradient(135deg,#5e1414,#7a1f1f);color:#fff;padding:3rem 1.5rem 2.2rem;text-align:center}
+header h1{margin:0;font-size:2rem;letter-spacing:.02em}header p{margin:.6rem auto 0;max-width:46rem;opacity:.94}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0}
+nav div{max-width:64rem;margin:0 auto;padding:.6rem 1rem;display:flex;gap:1.2rem;flex-wrap:wrap}
+nav a{color:var(--acc);text-decoration:none;font-size:.95rem}
+main{max-width:64rem;margin:0 auto;padding:1.5rem 1rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.3rem 1.5rem;margin:1.2rem 0}
+h2{color:var(--acc);font-size:1.2rem;margin-top:0}
+table{border-collapse:collapse;width:100%;font-size:.92rem}td,th{border:1px solid var(--line);padding:.4rem .6rem;text-align:left}
+code{font:13px ui-monospace,monospace;background:#f3efe6;border-radius:4px;padding:.1rem .35rem}
+.stack{font:13px/1.7 ui-monospace,monospace;background:#1d1814;color:#e9e0d0;border-radius:8px;padding:1rem;overflow:auto}
+.cta{display:inline-block;background:var(--acc);color:#fff;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;margin:.3rem .4rem 0 0}
+.tag{display:inline-block;background:#efe7d8;border-radius:3px;padding:.05rem .5rem;font-size:.8rem;margin:.15rem}
+footer{padding:1.6rem;color:#777;font-size:.85rem;text-align:center}
+a{color:var(--acc)}</style></head><body>
+<header><h1>ILM — Integrative Linguistic Multiscript</h1>
+<p>A reversible canonical substrate beneath the world's writing systems — proven in systems programming
+since <b>15 August 2004</b> (Hindawi Programming System), specified through the full AGI stack.</p>
+<p><a class="cta" href="map.html">▶ Live demo: program in 41 Perso-Arabic-family languages</a>
+<a class="cta" href="research/">Research &amp; live status</a>
+<a class="cta" href="https://github.com/project-ilm/romenagri">Code (GPL)</a></p></header>
+<nav><div><a href="#what">What</a><a href="#stack">AGI stack</a><a href="#proof">Proof</a>
+<a href="#standards">Standards</a><a href="#scripts">Scripts &amp; languages</a><a href="#join">Participate</a></div></nav>
+<main>
+<section id="what"><h2>What ILM is</h2>
+<p><b>Layer 1</b>: per-script projection tables map every writing system to a canonical hub.
+<b>Layer 2</b>: a fixed reversible kernel (<b>Romenagri</b>, GPL 2003) emits ASCII-7, case-free,
+diacritic-free output that is <b>legal as a C identifier</b> — so native-script source compiles
+through an unmodified GCC, and the surface is always recoverable. One canonical identity, every
+layer of computing.</p>
+<p class="tag">Reversible</p><p class="tag">ASCII-7</p><p class="tag">Identifier-legal</p>
+<p class="tag">3 script families unified</p><p class="tag">68-language keyword standards</p></section>
+<section id="stack"><h2>The full AGI stack — one substrate, every layer</h2>
+<div class="stack">L9  Cognition / AGI alignment — modality-agnostic canonical identity
+L8  Applications / JS        — LIVE: ilm.codes transpile-and-execute (41 languages)
+L7  WASM bridge              — one C kernel for web and systems
+L6  AI / ML substrate        — lossless byte/alphabet compression for tokenization
+L5  Distributed / GPU
+L4  Systems programming      — HPS: C, C++, ASM, LEX, YACC, BASIC in native script → GCC (2004)
+L3  Firmware / OS
+L2  Synthesis → GDSII        — OpenLane / Sky130
+L1  Verification             — UVM / SVA
+L0  RTL                      — VHDL (IEEE-1076) / Verilog (IEEE-1800)</div>
+<p>The same reversible identity that lets a Hindi program compile (L4) is the substrate AI
+tokenization needs (L6) and AGI alignment requires (L9). System first; software is one medium.</p></section>
+<section id="proof"><h2>Measured, public, honest</h2>
+<table><tr><th>Claim</th><th>Evidence</th></tr>
+<tr><td>Reversibility invariant (2003-04 kernel)</td><td>98.68% reversible-or-canonical, 1.31% irreducible — exhaustive [a-z]¹⁻⁴</td></tr>
+<tr><td>Six-paradigm conformance, 2026 toolchain</td><td>ASM, C, C++, LEX, BASIC compile &amp; run in Devanagari via unmodified GCC/fasm/flex (YACC: one prototype fix in review)</td></tr>
+<tr><td>Compression substrate</td><td>1.76× bytes, alphabet 51→24, 3× byte-positions — lossless; BPE token k&lt;1 at matched merges reported, not hidden</td></tr>
+<tr><td>45 Brahmi-derived scripts</td><td>generated Layer-1 tables, per-script round-trip + compile-and-run conformance; frontiers flagged, never faked</td></tr>
+<tr><td>Perso-Arabic</td><td>Urdu↔hub↔Romenagri round trip scripted &amp; md5-tracked; 41 languages live in the demo</td></tr></table>
+<p>Every number above is reproducible from <a href="https://github.com/project-ilm/romenagri">the repo</a>
+(<code>docs/RUNBOOK.md</code>, <code>results/</code>).</p></section>
+<section id="standards"><h2>Per-language programming standards</h2>
+<p><b>68 languages × 201 constructs</b> — real translations (Bengali যদি, Tamil எனில், Urdu اگر),
+each with its reversible Romenagri ASCII-7 identifier form, published as per-language standards
+documents that <b>map into</b> ISO/IEC 9899 (C), 14882 (C++), IEEE 1800, IEEE 754, Khronos, OMG,
+ONNX — localization of the standards, not re-authorship.
+<a href="https://github.com/project-ilm/romenagri/tree/main/langspec/output">Browse the standards</a> ·
+<a href="https://github.com/project-ilm/romenagri/tree/main/langs">keyword packs</a> ·
+<a href="research/status.json">machine-readable status</a></p></section>
+<section id="scripts"><h2>Scripts vs languages — two axes, both covered</h2>
+<p><b>Scripts (writing systems):</b> 45 Brahmi-derived projection tables + Perso-Arabic family +
+NW-Semitic (Hebrew table live; Syriac/Aramaic/Phoenician/Samaritan staged) — Layer-1, generated and
+flagged. <b>Languages (vocabulary):</b> the 68-language keyword registry — Layer-"speech", each
+language in its own words. A Bengali programmer gets Bengali <i>words</i> in Bengali <i>script</i>;
+the kernel beneath never changes.</p></section>
+<section id="join"><h2>Participate</h2>
+<p><b>Developers:</b> start at <code>bindings/</code> (C, JS, Java/Android, WASM — one canonical
+basis). <b>Linguists:</b> review a projection table or a keyword pack; PARTIAL rows are the open
+frontier. <b>Researchers:</b> the runbook reproduces every figure in one command.
+<b>History:</b> SourceForge 2004 · GNU Savannah 2005 · CSI YITPA 2005 · FOSS India/C-DAC 2008 · TDIL.</p></section>
+</main><footer>© 1993–2026 Abhishek Choudhary · Romenagri GPL 2003 · Hindawi Programming System 15 Aug 2004 · ILM</footer>
+</body></html>
