@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Research & Status</title>
+<style>
+:root{--ink:#1a1a1a;--acc:#7a1f1f;--bg:#faf8f4;--card:#fff}
+body{font:16px/1.65 Georgia,serif;color:var(--ink);background:var(--bg);margin:0}
+header{background:var(--acc);color:#fff;padding:2.2rem 1.5rem}
+header h1{margin:0;font-size:1.7rem} header p{margin:.4rem 0 0;opacity:.92}
+main{max-width:62rem;margin:0 auto;padding:1.5rem}
+section{background:var(--card);border:1px solid #e4ded3;border-radius:8px;padding:1.2rem 1.4rem;margin:1.2rem 0}
+h2{font-size:1.15rem;color:var(--acc);margin-top:0}
+code,pre{font:13px/1.5 ui-monospace,monospace;background:#f4f1ea;border-radius:4px;padding:.1rem .35rem}
+pre{padding:.8rem;overflow:auto} a{color:var(--acc)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+td,th{border:1px solid #e4ded3;padding:.4rem .6rem;text-align:left}
+.tag{display:inline-block;background:#efe7d8;border-radius:3px;padding:.05rem .5rem;font-size:.8rem;margin-right:.4rem}
+footer{padding:1.5rem;color:#777;font-size:.85rem;text-align:center}
+</style></head><body>
+<header><h1>ILM — Integrative Linguistic Multiscript</h1>
+<p>A reversible canonical substrate beneath the world's writing systems — from systems programming (2004) to the AGI stack.</p></header>
+<main>
+<section><h2>What this is</h2>
+<p>ILM separates <b>script</b> from <b>language</b> from <b>program</b>: per-script projection
+tables (Layer 1) feed a fixed reversible kernel (Layer 2, Romenagri, GPL 2003) whose output is
+ASCII-7, case-free, diacritic-free, and <b>legal as C identifiers</b> — so native-script source
+compiles through an unmodified GCC. First realised in the <b>Hindawi Programming System</b>
+(public release 15 Aug 2004; CSI YITPA 2005; FOSS India/C-DAC; TDIL-recognised; GNU Savannah 2005).</p>
+<p><span class="tag">Live</span><a href="../map.html">41 Perso-Arabic-family languages: transpile &amp; execute</a></p></section>
+<section><h2>Ongoing work — live status</h2>
+<p>Machine-readable: <a href="status.json">status.json</a></p>
+<table><tr><th>Track</th><th>State</th></tr>
+<tr><td>Kernel reversibility (2003-04)</td><td>98.68% reversible-or-canonical, 1.31% irreducible floor (measured, exhaustive [a-z]&sup1;&#8315;&#8308;)</td></tr>
+<tr><td>Kernel variant audit</td><td>chintamani reverse-parser regression found (67.6% post-guard) — hardened v1 cuts from the 2004 kernel</td></tr>
+<tr><td>Compression substrate</td><td>1.76&times; bytes, alphabet 51&rarr;24, 3&times; byte-positions (lossless); BPE token-count k&lt;1 at matched merges — reported honestly</td></tr>
+<tr><td>Brahmi family</td><td>ALL Unicode Brahmi-derived scripts: generated Layer-1 projections + per-script round-trip reports</td></tr>
+<tr><td>Bindings</td><td>C (kernel) &middot; JS (table-driven) &middot; Java/Android &middot; WASM (emcc)</td></tr>
+<tr><td>Localized systems programming</td><td>Urdu, Gurmukhi, Farsi, Hebrew C demos compile through unmodified GCC</td></tr></table></section>
+<section><h2>For developers</h2>
+<p>Repo: <a href="https://github.com/project-ilm/romenagri">project-ilm/romenagri</a> (GPL).
+Start: <code>bindings/js/romenagri.js</code> (browser/node), <code>bindings/c/</code> (kernel),
+<code>demos/</code> (localized C), <code>tables/canonical_basis.json</code> (the one canonical
+mapping every binding shares). Tests: <code>RUNBOOK.md</code> — exhaustive round-trip
+classification (exact / canonical / irreducible / crash) you can reproduce in one command.</p></section>
+<section><h2>For linguists</h2>
+<p>Layer-1 projection tables are generated from Unicode names and <b>flagged, not faked</b>:
+each script reports coverage% and the unmapped letters as research frontiers needing
+native-speaker review. The phonological basis is varṇamālā-ordered and IPA-anchored;
+abjad vowel underspecification is treated as a property of the source orthography, with
+reversibility defined to canonical form. Contributions: review a table, submit corrections.</p></section>
+<section><h2>Localized programming-language standards</h2>
+<p>The ILM langspec registry maps 201 language constructs &times; 68 languages = 13,668
+C-identifier-legal localized keywords that <b>map into</b> existing standards (ISO/IEC 9899 C,
+14882 C++, IEEE 1800 SV, IEEE 754, Khronos, OMG, ONNX) — localization of the standards, not
+re-authorship. The AGI-stack scope runs RTL (VHDL/Verilog) &rarr; firmware &rarr; systems &rarr;
+AI/ML &rarr; WASM, one canonical identity across all layers.</p></section>
+</main><footer>© 1993–2026 Abhishek Choudhary · Romenagri GPL 2003 · HPS first release 15 Aug 2004</footer>
+</body></html>
