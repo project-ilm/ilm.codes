@@ -1,0 +1,35 @@
+name: "Language proposal"
+description: "Add a language keyword registry (construct,native_keyword,romenagri) for the langspec generator."
+title: "Language: <name> (<ISO 639-3 code>)"
+labels: ["language", "langspec"]
+body:
+  - type: markdown
+    attributes:
+      value: "A language = ontology rows. KW_IF -> if; semantics preserved. See https://ilm.codes/contribute/"
+  - type: input
+    id: code
+    attributes: { label: "ISO 639-3 code", placeholder: "e.g. bho, mai, ctg" }
+    validations: { required: true }
+  - type: input
+    id: name
+    attributes: { label: "Language / dialect / idiolect name" }
+    validations: { required: true }
+  - type: input
+    id: pivot
+    attributes: { label: "Pivot language for review (any MT-supported language)", placeholder: "e.g. Hindi, English" }
+    validations: { required: true }
+  - type: textarea
+    id: registry
+    attributes: { label: "Keyword registry (CSV: construct,native_keyword,romenagri)", render: text }
+    validations: { required: true }
+  - type: input
+    id: doi
+    attributes: { label: "DOI for the original-language artifact" }
+  - type: checkboxes
+    id: charter
+    attributes:
+      label: Charter
+      options:
+        - { label: "DOI-verifiable; published/timestamped before PR where substantive.", required: true }
+        - { label: "Compatible license.", required: true }
+        - { label: "National-narrative neutral; academic/technical only.", required: true }

@@ -1,0 +1,12 @@
+name: "Bug / site issue"
+description: "Something on the site or in the tooling is broken."
+title: "Bug: <summary>"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes: { label: "What happened vs. expected" }
+    validations: { required: true }
+  - type: input
+    id: where
+    attributes: { label: "URL / file / command" }

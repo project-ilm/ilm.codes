@@ -1,0 +1,86 @@
+{
+ "updated": "2026-06-14",
+ "scripts": {
+  "iso15924_coded": 226,
+  "unicode_encoded": 187,
+  "seeded": 74
+ },
+ "languages": {
+  "iso639_3_total": 7867,
+  "living": 7027,
+  "seeded": 58
+ },
+ "scripts_universe_estimate": "600-700 (ISO 15924 coded + unencoded backlog + historical/variant)",
+ "agi_stack": [
+  {
+   "layer": "L0",
+   "name": "Hardware Definition (RTL)",
+   "status": "VHDL/Verilog localized"
+  },
+  {
+   "layer": "L1",
+   "name": "Verification / Simulation",
+   "status": "UVM/SVA"
+  },
+  {
+   "layer": "L2",
+   "name": "Synthesis / Compilation",
+   "status": "OpenLane/Sky130"
+  },
+  {
+   "layer": "L3",
+   "name": "Firmware / Embedded",
+   "status": "Indic OS infra"
+  },
+  {
+   "layer": "L4",
+   "name": "Systems (C/C++/Rust/Go)",
+   "status": "HPS 6/6 via unmodified GCC-15; HindiC++ spec"
+  },
+  {
+   "layer": "L5",
+   "name": "Parallel (CUDA/OpenCL/GPU)",
+   "status": "localized"
+  },
+  {
+   "layer": "L6",
+   "name": "Distributed / Cloud / Edge / HPC",
+   "status": "localized"
+  },
+  {
+   "layer": "L7",
+   "name": "AI / ML / Deep Learning",
+   "status": "reversible substrate"
+  },
+  {
+   "layer": "L8",
+   "name": "Robotics / Embodiment",
+   "status": "LIVE: map.html, 41 languages"
+  },
+  {
+   "layer": "L9",
+   "name": "AGI / ASI alignment",
+   "status": "canonical identity"
+  }
+ ],
+ "measured": {
+  "reversibility_hardened": "98.68% rev-or-canonical / 1.31% irreducible (exhaustive [a-z]^1-4, 475254)",
+  "reversibility_repo_postguard": "67.62% rev-or-canonical / 2.70% crash",
+  "hps_paradigms": "6/6 (ASM,C,C++,LEX,BASIC,YACC) compile+run in Devanagari, unmodified GCC-15",
+  "roman_heuristic": "100% totality, 91.56% kernel-stable",
+  "perso_arabic": "Arabic block 200/200 additive",
+  "script_families": "187 enumerated / 9 families; Brahmic 72 deep avg ~73%; Hebrew 27/27; Syriac 22/35",
+  "compression": "1.76x bytes; alphabet 51->24; byte-positions 3x (lossless)",
+  "langspec": "language + dialect + idiolect each -> standard + compiled-and-ran C",
+  "hindic_cpp": "ISO-style HindiC++ language spec (token equivalence to C++) in hindawiai/chintamani"
+ },
+ "constructs_ontology": "10,000+ (extensible)",
+ "langspec_languages_implemented": "68+",
+ "repos": {
+  "kernel": "github.com/project-ilm/romenagri",
+  "site": "github.com/project-ilm/ilm.codes",
+  "legacy": "github.com/project-ilm/legacy",
+  "lineage": "github.com/hindawiai/chintamani",
+  "results_page": "https://project-ilm.github.io/romenagri/"
+ }
+}

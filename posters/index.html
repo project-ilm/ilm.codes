@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Academic Posters</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>.lightbox{position:fixed;inset:0;background:rgba(3,4,12,.94);display:none;z-index:99;
+ align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+.lightbox img{max-width:100%;max-height:92vh;border:1px solid var(--line);border-radius:8px}</style>
+</head><body>
+<main><section class="flow"><div class="wrap reveal">
+ <h2>Academic posters</h2>
+ <p class="lead">Romenagri / ILM across the disciplines it touches — formal language theory, information
+ theory, psycholinguistics, neurolinguistics, cognitive science, and the civilizational argument. Each is a
+ standalone academic statement of the same hypothesis: identity survives projection. Click to enlarge.
+ <span class="pill">© 1993–2026 Abhishek Choudhary</span><span class="pill">CC BY 4.0</span></p>
+ <div class="gallery" id="g"></div>
+</div></section></main>
+<div class="lightbox" id="lb" onclick="this.style.display='none'"><img id="lbi" src="" alt=""></div>
+<script>
+fetch("/assets/posters/manifest.json").then(r=>r.json()).then(function(m){
+ var g=document.getElementById("g");
+ m.forEach(function(p){
+   g.insertAdjacentHTML("beforeend",
+    '<figure id="'+p.slug+'"><img loading="lazy" src="/assets/posters/'+p.slug+'.thumb.jpg" '+
+    'data-full="/assets/posters/'+p.slug+'.jpg" alt="'+p.title+'" style="cursor:zoom-in">'+
+    '<figcaption><span class="dom">'+(p.domain||'')+'</span><br>'+p.title+'</figcaption></figure>');
+ });
+ g.querySelectorAll("img").forEach(function(im){im.onclick=function(){
+   document.getElementById("lbi").src=this.dataset.full; document.getElementById("lb").style.display="flex";};});
+ if(location.hash){var t=document.getElementById(location.hash.slice(1)); if(t)t.scrollIntoView();}
+}).catch(function(){document.getElementById("g").innerHTML="<p class='lead'>Posters unavailable.</p>";});
+</script>
+<script src="/assets/anim.js" data-base=""></script>
+</body></html>

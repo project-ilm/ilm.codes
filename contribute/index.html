@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Contribute</title>
+<link rel="stylesheet" href="/assets/site.css">
+</head><body>
+<main><section class="flow"><div class="wrap prose reveal">
+ <h2>Contribute</h2>
+ <p class="lead">You do not need permission and you do not need to be an expert. Pick a script or a language,
+ bring evidence, and let the work speak. Read the <a href="/charter/">Charter</a> first — it is short and it
+ is what keeps this project open to everyone, everywhere.</p>
+
+ <h3>Brand new to GitHub? Start here</h3>
+ <p>GitHub is where the code and the registries live. A few concepts, each linked to a plain explanation and
+ an official guide:</p>
+ <table class="t">
+  <tr><th>Concept</th><th>What it means</th><th>Learn</th></tr>
+  <tr><td><b>Repository</b></td><td>A project folder with full history.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Repository_(version_control)">Wikipedia</a> · <a href="https://docs.github.com/en/repositories">GitHub docs</a></td></tr>
+  <tr><td><b>Fork</b></td><td>Your own copy of a repo to work in freely.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Fork_(software_development)">Wikipedia</a> · <a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">GitHub docs</a></td></tr>
+  <tr><td><b>Branch</b></td><td>A parallel line of work inside a repo.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Branching_(version_control)">Wikipedia</a> · <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches">GitHub docs</a></td></tr>
+  <tr><td><b>Commit</b></td><td>A saved, described change.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Commit_(version_control)">Wikipedia</a> · <a href="https://docs.github.com/en/get-started/using-git/about-git">GitHub docs</a></td></tr>
+  <tr><td><b>Pull request (PR)</b></td><td>Proposing your change be merged in.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Distributed_version_control">Wikipedia</a> · <a href="https://docs.github.com/en/pull-requests">GitHub docs</a></td></tr>
+  <tr><td><b>Issue</b></td><td>A tracked task, proposal, or question.</td>
+    <td><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues">GitHub docs</a></td></tr>
+  <tr><td><b>Git</b></td><td>The version-control system underneath.</td>
+    <td><a href="https://en.wikipedia.org/wiki/Git">Wikipedia</a> · <a href="https://git-scm.com/doc">git-scm</a></td></tr>
+ </table>
+
+ <h3>Ask an AI to walk you through it</h3>
+ <p>Stuck? Open a ready-made prompt in your assistant of choice (click-through — it pre-fills the question):</p>
+ <p>
+  <a class="aihelp" id="ai-fork-claude" href="#">▶ Claude: “how do I fork project-ilm and open a PR?”</a><br>
+  <a class="aihelp" id="ai-fork-gpt" href="#">▶ ChatGPT: “how do I fork project-ilm and open a PR?”</a><br>
+  <a class="aihelp" id="ai-script-claude" href="#">▶ Claude: “help me add a new script projection table to ILM”</a><br>
+  <a class="aihelp" id="ai-lang-gpt" href="#">▶ ChatGPT: “help me write an ILM language keyword registry”</a>
+ </p>
+
+ <h3>What to work on</h3>
+ <div class="cards">
+  <div class="card"><h3>Add a script</h3><p>Pick a <span class="pending">pending</span> or
+   <span class="encoded">encoded</span> script in the <a href="/explore/">3D explorer</a> or
+   <a href="/scripts/">table</a>. Add one Unicode→Devanagari-hub projection table row. The kernel never changes.</p>
+   <a class="go" href="https://github.com/project-ilm/ilm.codes/issues/new?template=script_proposal.yml">Propose a script →</a></div>
+  <div class="card"><h3>Add a language</h3><p>Write a keyword registry
+   (<code>construct,native_keyword,romenagri</code>) and run the langspec generator → a standard doc + a
+   compile-verified program. Even a dialect or your own idiolect.</p>
+   <a class="go" href="https://github.com/project-ilm/ilm.codes/issues/new?template=language_proposal.yml">Propose a language →</a></div>
+  <div class="card"><h3>Validate / invalidate</h3><p>Bring independent checks or adversarial tests against any
+   claim. Disagreement with evidence is welcome and valued.</p>
+   <a class="go" href="https://github.com/project-ilm/ilm.codes/issues/new?template=validation.yml">Open a validation →</a></div>
+ </div>
+
+ <h3>The rules (from the Charter)</h3>
+ <ul>
+  <li><b>Evidence over authority.</b> Back claims with a verifiable <b>DOI</b> (Zenodo / OSF / journal). Bring your own validators and invalidators.</li>
+  <li><b>Publish first, then PR.</b> Timestamp and, ideally, publish or file before the pull request, to protect your authorship.</li>
+  <li><b>Academic / technical only.</b> No political, religious, or communal content. Respect national narratives; the layer is narrative-neutral.</li>
+  <li><b>No primary sociolinguistic data.</b> Contribute derived, published, citable artifacts — not community field data.</li>
+  <li><b>Compatible licenses only.</b> Code GPL-3.0-or-later; docs CC BY 4.0. You are responsible for your contribution's license. <span class="mut">Maintainers may decline or later remove non-compliant material.</span></li>
+  <li><b>Low-resource languages welcome.</b> Provide a widely-supported pivot language for review; keep the original DOI-verifiable.</li>
+ </ul>
+
+ <h3>Process documents</h3>
+ <p><a href="https://github.com/project-ilm/ilm.codes/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> ·
+ <a href="https://github.com/project-ilm/ilm.codes/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a> ·
+ <a href="https://github.com/project-ilm/ilm.codes/blob/main/GOVERNANCE.md">Governance</a> ·
+ <a href="/charter/">Charter</a> ·
+ <a href="https://github.com/project-ilm/ilm.codes/issues/new/choose">Open an issue</a></p>
+</div></section></main>
+<script>
+(function(){
+ var P={
+  fork:"I want to contribute to an open-source project called Project ILM on GitHub (github.com/project-ilm). Walk me step by step, as a beginner, through forking the repository, making a change on a branch, committing, and opening a pull request.",
+  script:"Help me add a new writing-script projection table to Project ILM (an ISO 15924 script mapped to a Devanagari hub, then to reversible Romenagri ASCII-7). Explain what a projection table row should contain and how to test it without changing the kernel.",
+  lang:"Help me write a Project ILM language keyword registry: a CSV of construct,native_keyword,romenagri that localizes programming keywords into a chosen human language while preserving C/C++ semantics. Explain the format and give an example."
+ };
+ function set(id,base,key){var e=document.getElementById(id); if(e)e.href=base+encodeURIComponent(P[key]);}
+ set("ai-fork-claude","https://claude.ai/new?q=","fork");
+ set("ai-fork-gpt","https://chatgpt.com/?q=","fork");
+ set("ai-script-claude","https://claude.ai/new?q=","script");
+ set("ai-lang-gpt","https://chatgpt.com/?q=","lang");
+})();
+</script>
+<script src="/assets/anim.js" data-base=""></script>
+</body></html>

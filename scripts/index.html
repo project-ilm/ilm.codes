@@ -1,39 +1,27 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ILM — Scripts — ISO 15924</title><link rel="stylesheet" href="../registry/ilm-reg.css"></head><body>
-<div class="mig"><b>Migrating.</b> <code>ilm.codes</code> retires ~Aug 2026 &rarr; <a href="https://ilmcodes.com">ilmcodes.com</a> &middot; <a href="https://ilmcodes.net">ilmcodes.net</a></div>
-<nav><div><a href="../">&larr; ILM home</a><a href="../scripts/">Scripts</a><a href="../languages/">Languages</a><a href="../context/">Continue (AI)</a><a href="../research/">Research</a><a href="../map.html">Live demo</a></div></nav>
-<header><h1>Scripts — ISO 15924</h1><p>Every script Unicode/ISO 15924 knows of, with ILM status. The kernel never changes — each row is one additive projection table. Beyond these, a ~100+ unencoded backlog (Script Encoding Initiative) completes the 600–700 universe.</p></header>
-<main>
-<section><div class="grid" id="kv"><div class="kv"><b>226</b><span>ISO 15924 coded scripts</span></div><div class="kv"><b>187</b><span>encoded in Unicode</span></div><div class="kv"><b>74</b><span>seeded in ILM (deep projection)</span></div></div>
-<input type="search" id="q" placeholder="filter — type a code, name, status…">
-<p class="mut">Click a column header to sort. Status: <span class="seeded">seeded</span> = a real
-ILM table/registry entry exists; <span class="encoded">encoded</span> = present in Unicode, table pending;
-<span class="pending">pending</span> = additive row to add. Raw: <a href="../registry/scripts.tsv">scripts.tsv</a>.</p>
-<div id="t">loading…</div></section>
-</main>
-<footer>&copy; 1993&ndash;2026 Abhishek Choudhary &middot; source: Scripts — ISO 15924 standard &middot; ilmcodes.com / ilmcodes.net</footer>
+<title>ILM — Scripts — ISO 15924</title><link rel="stylesheet" href="/assets/site.css">
+<style>#q{max-width:32rem}#t{max-height:70vh;overflow:auto;border:1px solid var(--line);border-radius:12px}</style>
+</head><body><main><section class="flow"><div class="wrap reveal">
+<h2>Scripts — ISO 15924</h2><p class="lead">Every script ISO 15924 / Unicode knows of, with ILM status. The kernel never changes — each row is one additive projection table. Browse it in <a href="/explore/">3D</a>.</p>
+<div class="dash" style="margin-bottom:1rem"><div class="stat"><b data-count="226">226</b><div class="lab">ISO 15924 coded</div></div><div class="stat"><b data-count="187">187</b><div class="lab">encoded in Unicode</div></div><div class="stat"><b data-count="74">74</b><div class="lab">seeded in ILM</div></div></div>
+<input type="search" id="q" placeholder="filter — code, name, status…">
+<p class="mut" style="font-size:.85rem"><span class="seeded">●</span> seeded — table/registry exists ·
+<span class="encoded">●</span> encoded — in Unicode, pending · <span class="pending">●</span> pending — additive row.
+Raw: <a href="/registry/scripts.tsv">scripts.tsv</a>. Click a header to sort.</p>
+<div id="t">loading…</div>
+</div></section></main>
 <script>
 const COLS=["code","num","name","unicode_pva","unicode_version","status"];
-fetch("../registry/scripts.tsv").then(r=>r.text()).then(txt=>{
- const lines=txt.trim().split("\n"); const head=lines[0].split("\t");
- let rows=lines.slice(1).map(l=>l.split("\t"));
- const idx={}; head.forEach((h,i)=>idx[h]=i);
- const statusI=idx["status"];
- let sortCol=-1,sortDir=1;
- function render(data){
-  let h='<table><thead><tr>'+COLS.map((c,i)=>'<th data-i="'+i+'">'+c+'</th>').join('')+'</tr></thead><tbody>';
-  for(const r of data){h+='<tr>'+COLS.map((c,i)=>{
-     let v=r[idx[c]]||''; if(c==='status')v='<span class="'+v+'">'+v+'</span>'; return '<td>'+v+'</td>';}).join('')+'</tr>';}
-  h+='</tbody></table>'; document.getElementById('t').innerHTML=h;
-  document.querySelectorAll('th').forEach(th=>th.onclick=()=>{const i=+th.dataset.i;const col=COLS[i];
-     if(sortCol===i)sortDir*=-1;else{sortCol=i;sortDir=1;}
-     data.sort((a,b)=>((a[idx[col]]||'')>(b[idx[col]]||'')?1:-1)*sortDir); render(data);});
- }
- function filt(){const q=document.getElementById('q').value.toLowerCase();
-   render(q?rows.filter(r=>r.join(' ').toLowerCase().includes(q)):rows);}
- document.getElementById('q').oninput=filt; render(rows);
- document.getElementById('count')&&(document.getElementById('count').textContent=rows.length);
-});
+fetch("/registry/scripts.tsv").then(r=>r.text()).then(txt=>{
+ const L=txt.trim().split("\n"),head=L[0].split("\t"),idx={};head.forEach((h,i)=>idx[h]=i);
+ let rows=L.slice(1).map(l=>l.split("\t")),sc=-1,dir=1;
+ function render(d){let h='<table class="t"><thead><tr>'+COLS.map((c,i)=>'<th data-i="'+i+'">'+c+'</th>').join('')+'</tr></thead><tbody>';
+  for(const r of d){h+='<tr>'+COLS.map(c=>{let v=r[idx[c]]||'';if(c==='status')v='<span class="'+v+'">'+v+'</span>';return '<td>'+v+'</td>';}).join('')+'</tr>';}
+  document.getElementById('t').innerHTML=h+'</tbody></table>';
+  document.querySelectorAll('th').forEach(th=>th.onclick=()=>{const i=+th.dataset.i,c=COLS[i];if(sc===i)dir*=-1;else{sc=i;dir=1;}d.sort((a,b)=>((a[idx[c]]||'')>(b[idx[c]]||'')?1:-1)*dir);render(d);});}
+ document.getElementById('q').oninput=function(){const q=this.value.toLowerCase();render(q?rows.filter(r=>r.join(' ').toLowerCase().includes(q)):rows);};
+ render(rows);
+}).catch(()=>{document.getElementById('t').innerHTML='Could not load /registry/scripts.tsv';});
 </script>
-</body></html>
+<script src="/assets/anim.js" data-base=""></script></body></html>

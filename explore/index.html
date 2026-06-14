@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — 3D Explorer · scripts × languages × the AGI stack</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+#stage{position:relative;height:78vh;min-height:520px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#05060f}
+#stage canvas{display:block}
+#hud{position:absolute;top:12px;left:12px;background:rgba(8,11,30,.78);backdrop-filter:blur(8px);
+ border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;max-width:300px;font-size:.82rem}
+#hud h4{margin:.1rem 0 .5rem;color:var(--acc)}
+#hud label{display:block;color:#cdd4f5;margin:.2rem 0;cursor:pointer}
+#legend span{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.35rem;vertical-align:middle}
+#tip{position:absolute;pointer-events:none;background:rgba(8,11,30,.92);border:1px solid var(--acc);
+ border-radius:8px;padding:.5rem .7rem;font-size:.8rem;display:none;max-width:240px;z-index:5}
+#tip b{color:var(--acc)} #tip .act{color:var(--cy);font-size:.74rem;margin-top:.3rem;display:block}
+#cnt{position:absolute;right:12px;bottom:12px;font-size:.74rem;color:var(--mut);text-align:right}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mut)}
+</style>
+</head><body>
+<main><section class="flow"><div class="wrap">
+ <h2>3D Explorer</h2>
+ <p class="lead">Every ISO 15924 script and every ISO 639-3 language as one navigable universe around the
+ canonical core Ω, with the AGI stack as the vertical axis. Drag to orbit, scroll to zoom. Colour = status.
+ <b>Click any script or language</b> to fork it and start work — it opens a pre-filled proposal. Data is
+ loaded live from the registries, so this view updates itself as the work grows.</p>
+
+ <div id="stage">
+  <div class="loading" id="load">Loading the universe… (Three.js + live registries)</div>
+  <div id="hud">
+   <h4>Filter</h4>
+   <div id="legend">
+    <label><input type="checkbox" id="f-seeded" checked> <span style="background:#5be08a"></span>seeded — table/registry exists</label>
+    <label><input type="checkbox" id="f-encoded" checked> <span style="background:#d4a843"></span>encoded — in Unicode, pending</label>
+    <label><input type="checkbox" id="f-pending" checked> <span style="background:#6470a0"></span>pending — additive row</label>
+   </div>
+   <h4 style="margin-top:.7rem">Show</h4>
+   <label><input type="checkbox" id="show-scripts" checked> scripts (ISO 15924)</label>
+   <label><input type="checkbox" id="show-langs" checked> languages (ISO 639-3)</label>
+   <label><input type="checkbox" id="spin" checked> auto-rotate</label>
+  </div>
+  <div id="tip"></div>
+  <div id="cnt"></div>
+ </div>
+
+ <p class="lead" style="margin-top:1rem">The vertical axis is the AGI stack <span class="mono">L0 (RTL) → L9
+ (alignment)</span>. Scripts cluster by family around Ω; height reflects how far up the stack they are
+ demonstrated; the faint outer cloud is the 7,867 languages. Prefer reading first?
+ <a class="btn ghost" href="/scripts/">Scripts table</a><a class="btn ghost" href="/languages/">Languages table</a></p>
+</div></section></main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
+<script>
+const COL={seeded:0x5be08a,encoded:0xd4a843,pending:0x6470a0};
+const FAMILY_ANGLE={}; // assigned as we read
+const ISSUE="https://github.com/project-ilm/ilm.codes/issues/new";
+function tsv(t){const L=t.trim().split("\n");const h=L[0].split("\t");return L.slice(1).map(r=>{const c=r.split("\t");const o={};h.forEach((k,i)=>o[k]=c[i]);return o;});}
+
+let scene,cam,rndr,ctrl,raycaster,mouse,scriptPts,langPts,scriptData=[],langData=[],omega;
+let spin=true;
+
+function famAngle(f){ if(!(f in FAMILY_ANGLE)){const n=Object.keys(FAMILY_ANGLE).length;FAMILY_ANGLE[f]=n;} return FAMILY_ANGLE[f]; }
+function family(s){ // crude family bucket from PVA/name for layout colour-neutral grouping
+ const n=((s.unicode_pva||"")+" "+(s.name||"")).toLowerCase();
+ if(/deva|beng|taml|telu|knda|mlym|gujr|guru|orya|sinh|tibt|mymr|thai|khmr|brah|gran|sharad|modi|newa|limb|lepc|saur|ahom|java|bali|sund/.test(n))return "Brahmic";
+ if(/arab|aran|rohg|thaa|syrc|hebr|samr|mand|phnx|nbat|sogd|ougr|phli|avst/.test(n))return "Semitic/Perso-Arabic";
+ if(/latn|cyrl|grek|armn|geor|copt|runr|ogam|goth|glag|adlm/.test(n))return "Alphabetic";
+ if(/hani|hang|hira|kana|bopo|yiii|tang|nshu|lisu|plrd/.test(n))return "CJK/E-Asian";
+ if(/ethi|tfng|nkoo|vaii|bamu|mend|bass/.test(n))return "African";
+ if(/cans|cher|osge|dsrt/.test(n))return "American";
+ if(/egyp|xsux|hluw|lina|linb|cprt|cari|lyci|mero/.test(n))return "Ancient";
+ return "Other";
+}
+function statusOf(x){return x.status==="seeded"?"seeded":(x.status==="encoded"?"encoded":"pending");}
+
+function build(scripts,langs){
+ scriptData=scripts; langData=langs;
+ const W=document.getElementById("stage").clientWidth,H=document.getElementById("stage").clientHeight;
+ scene=new THREE.Scene();
+ cam=new THREE.PerspectiveCamera(55,W/H,.1,4000); cam.position.set(0,120,520);
+ rndr=new THREE.WebGLRenderer({antialias:true,alpha:true}); rndr.setSize(W,H); rndr.setPixelRatio(Math.min(2,devicePixelRatio));
+ document.getElementById("stage").appendChild(rndr.domElement);
+ ctrl=new THREE.OrbitControls(cam,rndr.domElement); ctrl.enableDamping=true; ctrl.autoRotate=true; ctrl.autoRotateSpeed=.5;
+ scene.add(new THREE.AmbientLight(0xffffff,.8));
+ const pl=new THREE.PointLight(0xffd9a0,1.2); pl.position.set(200,300,200); scene.add(pl);
+ // Omega core
+ omega=new THREE.Mesh(new THREE.IcosahedronGeometry(26,1),
+   new THREE.MeshStandardMaterial({color:0xd4a843,emissive:0x7a5a10,metalness:.6,roughness:.3,wireframe:false}));
+ scene.add(omega);
+ const halo=new THREE.Mesh(new THREE.IcosahedronGeometry(30,1),new THREE.MeshBasicMaterial({color:0xd4a843,wireframe:true,transparent:true,opacity:.25}));
+ scene.add(halo); omega.userData.halo=halo;
+ // AGI stack vertical axis L0..L9
+ const STK=420, base=-200;
+ const axisMat=new THREE.LineBasicMaterial({color:0x33407a});
+ const ag=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,base,0),new THREE.Vector3(0,base+STK,0)]);
+ scene.add(new THREE.Line(ag,axisMat));
+ for(let i=0;i<10;i++){const y=base+STK*i/9;
+   const ring=new THREE.Mesh(new THREE.TorusGeometry(60+ i*16,.6,6,64),new THREE.MeshBasicMaterial({color:0x2a3566,transparent:true,opacity:.5}));
+   ring.rotation.x=Math.PI/2; ring.position.y=y; scene.add(ring);
+   const lbl=makeLabel("L"+i); lbl.position.set(0,y,-(60+i*16)-18); scene.add(lbl);
+ }
+ // script points
+ scriptPts=makePoints(scripts,true);  scene.add(scriptPts);
+ // language points (outer cloud)
+ langPts=makePoints(langs,false); scene.add(langPts);
+ raycaster=new THREE.Raycaster(); raycaster.params.Points.threshold=6; mouse=new THREE.Vector2();
+ document.getElementById("load").style.display="none";
+ document.getElementById("cnt").innerHTML=scripts.length+" scripts · "+langs.length.toLocaleString()+" languages<br>live from /registry/*.tsv";
+ animate();
+}
+function makeLabel(txt){
+ const c=document.createElement("canvas");c.width=128;c.height=64;const x=c.getContext("2d");
+ x.fillStyle="#9aa3c7";x.font="bold 40px monospace";x.fillText(txt,8,46);
+ const tex=new THREE.CanvasTexture(c); const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));
+ sp.scale.set(38,19,1); return sp;
+}
+function makePoints(items,isScript){
+ const N=items.length,pos=new Float32Array(N*3),col=new Float32Array(N*3);
+ const STK=420,base=-200;
+ for(let i=0;i<N;i++){const it=items[i];const fam=isScript?family(it):"lang";
+   const fi=famAngle(fam); const ang=(fi/9)*Math.PI*2 + (i%37)/37*0.5;
+   const st=statusOf(it);
+   let r,y;
+   if(isScript){ r=90+ (st==="seeded"?40:st==="encoded"?120:200) + (i%11)*6;
+     y=base+STK*(st==="seeded"?0.62:st==="encoded"?0.4:0.2) + (i%9)*8 - 20; }
+   else { r=300+ (st==="seeded"?-60:60) + (i%53)*1.6; y=base+STK*((i*0.013)%1); }
+   pos[i*3]=Math.cos(ang)*r; pos[i*3+1]=y; pos[i*3+2]=Math.sin(ang)*r;
+   const cc=new THREE.Color(COL[st]); col[i*3]=cc.r;col[i*3+1]=cc.g;col[i*3+2]=cc.b;
+ }
+ const g=new THREE.BufferGeometry();
+ g.setAttribute("position",new THREE.BufferAttribute(pos,3));
+ g.setAttribute("color",new THREE.BufferAttribute(col,3));
+ const m=new THREE.PointsMaterial({size:isScript?9:3.2,vertexColors:true,transparent:true,
+   opacity:isScript?1:.5,sizeAttenuation:true});
+ const p=new THREE.Points(g,m); p.userData.items=items; p.userData.isScript=isScript; return p;
+}
+function animate(){requestAnimationFrame(animate); if(omega){omega.rotation.y+=.004;omega.userData.halo.rotation.y-=.003;}
+ ctrl.autoRotate=spin; ctrl.update(); rndr.render(scene,cam);}
+
+// interaction
+function pick(ev){
+ const st=document.getElementById("stage").getBoundingClientRect();
+ mouse.x=((ev.clientX-st.left)/st.width)*2-1; mouse.y=-((ev.clientY-st.top)/st.height)*2+1;
+ raycaster.setFromCamera(mouse,cam);
+ const tgts=[]; if(scriptPts&&scriptPts.visible)tgts.push(scriptPts); if(langPts&&langPts.visible)tgts.push(langPts);
+ const hits=raycaster.intersectObjects(tgts);
+ return hits.length?{p:hits[0].object,i:hits[0].index}:null;
+}
+function onMove(ev){const h=pick(ev);const tip=document.getElementById("tip");
+ if(!h){tip.style.display="none";return;}
+ const it=h.p.userData.items[h.i]; const isS=h.p.userData.isScript;
+ const st=document.getElementById("stage").getBoundingClientRect();
+ tip.style.display="block"; tip.style.left=(ev.clientX-st.left+14)+"px"; tip.style.top=(ev.clientY-st.top+14)+"px";
+ tip.innerHTML= isS
+   ? '<b>'+it.name+'</b> ('+it.code+')<br>ISO 15924 · '+statusOf(it)+(it.unicode_version?' · Unicode '+it.unicode_version:'')+'<span class="act">click → propose / fork this script</span>'
+   : '<b>'+it.name+'</b> ('+it.code+')<br>ISO 639-3 · '+(it.type||'')+' · '+statusOf(it)+'<span class="act">click → propose / fork this language</span>';
+}
+function onClick(ev){const h=pick(ev); if(!h)return;
+ const it=h.p.userData.items[h.i]; const isS=h.p.userData.isScript;
+ const tmpl=isS?"script_proposal.yml":"language_proposal.yml";
+ const title=encodeURIComponent((isS?"Script: ":"Language: ")+it.name+" ("+it.code+")");
+ window.open(ISSUE+"?template="+tmpl+"&title="+title,"_blank");
+}
+
+Promise.all([
+ fetch("/registry/scripts.tsv").then(r=>r.text()),
+ fetch("/registry/languages.tsv").then(r=>r.text())
+]).then(function(a){ build(tsv(a[0]),tsv(a[1])); }).catch(function(e){
+ document.getElementById("load").innerHTML="Could not load WebGL or the registries.<br>Open the <a href='/scripts/'>scripts</a> / <a href='/languages/'>languages</a> tables instead.";
+});
+
+addEventListener("DOMContentLoaded",function(){
+ var stg=document.getElementById("stage");
+ stg.addEventListener("mousemove",onMove); stg.addEventListener("click",onClick);
+ var bind=function(id,fn){var e=document.getElementById(id); if(e)e.addEventListener("change",fn);};
+ function applyFilter(){ /* simplest: toggle whole layers; per-status handled by rebuild */
+   if(scriptPts)scriptPts.visible=document.getElementById("show-scripts").checked;
+   if(langPts)langPts.visible=document.getElementById("show-langs").checked;
+ }
+ bind("show-scripts",applyFilter); bind("show-langs",applyFilter);
+ bind("spin",function(e){spin=e.target.checked;});
+ ["f-seeded","f-encoded","f-pending"].forEach(function(id){bind(id,function(){
+   // rebuild points filtered by checked statuses
+   if(!scene)return;
+   var ok={seeded:document.getElementById("f-seeded").checked,encoded:document.getElementById("f-encoded").checked,pending:document.getElementById("f-pending").checked};
+   scene.remove(scriptPts); scene.remove(langPts);
+   scriptPts=makePoints(scriptData.filter(x=>ok[statusOf(x)]),true);
+   langPts=makePoints(langData.filter(x=>ok[statusOf(x)]),false);
+   scriptPts.visible=document.getElementById("show-scripts").checked;
+   langPts.visible=document.getElementById("show-langs").checked;
+   scene.add(scriptPts); scene.add(langPts);
+ });});
+});
+addEventListener("resize",function(){ if(!rndr)return; var W=document.getElementById("stage").clientWidth,H=document.getElementById("stage").clientHeight;
+ cam.aspect=W/H;cam.updateProjectionMatrix();rndr.setSize(W,H);});
+</script>
+<script src="/assets/anim.js" data-base=""></script>
+</body></html>

@@ -32,29 +32,30 @@
   "results_page": "https://project-ilm.github.io/romenagri/"
  },
  "measured": {
-  "reversibility_hardened": "98.68% rev-or-canonical / 1.31% irreducible (exhaustive [a-z]^1-4)",
-  "reversibility_repo_bindings": "67.62% rev-or-canonical / 2.70% crash (post-guard variant)",
-  "hps": "6/6 paradigms compile+run in Devanagari via unmodified GCC-15",
+  "reversibility_hardened": "98.68% rev-or-canonical / 1.31% irreducible (exhaustive [a-z]^1-4, 475254)",
+  "reversibility_repo_postguard": "67.62% rev-or-canonical / 2.70% crash",
+  "hps_paradigms": "6/6 (ASM,C,C++,LEX,BASIC,YACC) compile+run in Devanagari, unmodified GCC-15",
   "roman_heuristic": "100% totality, 91.56% kernel-stable",
-  "perso_arabic": "Arabic block 200/200 (additive)",
-  "script_families": "179 scripts / 9 families; Brahmic 68 deep avg 74%; Hebrew 27/27; Syriac 22/35",
-  "langspec": "language + dialect + pure idiolect each -> standard + compiled-and-ran C"
+  "perso_arabic": "Arabic block 200/200 additive",
+  "script_families": "187 enumerated / 9 families; Brahmic 72 deep avg ~73%; Hebrew 27/27; Syriac 22/35",
+  "compression": "1.76x bytes; alphabet 51->24; byte-positions 3x (lossless)",
+  "langspec": "language + dialect + idiolect each -> standard + compiled-and-ran C",
+  "hindic_cpp": "ISO-style HindiC++ language spec (token equivalence to C++) in hindawiai/chintamani"
  },
  "registries": {
   "scripts": {
-   "standard": "ISO 15924",
-   "coded": 226,
+   "iso15924_coded": 226,
    "unicode_encoded": 187,
    "seeded": 74,
+   "standard": "ISO 15924",
    "data": "/registry/scripts.tsv",
-   "page": "/scripts/",
-   "unencoded_backlog": "Script Encoding Initiative; ~100+ scripts with no ISO 15924 code => 600-700 universe with variants/historical"
+   "page": "/scripts/"
   },
   "languages": {
-   "standard": "ISO 639-3",
-   "total": 7867,
+   "iso639_3_total": 7867,
    "living": 7027,
    "seeded": 58,
+   "standard": "ISO 639-3",
    "data": "/registry/languages.tsv",
    "page": "/languages/"
   }
@@ -64,5 +65,74 @@
   "SCRIPT: add Unicode->Devanagari-hub projection table row (table, not kernel)",
   "LANGUAGE: add keyword registry (construct,native_keyword,romenagri) -> langspec_gen -> standard + compiled C",
   "verify by execution; honest figures; name the kernel variant; push"
- ]
+ ],
+ "public_pages": {
+  "home": "/",
+  "explore_3d": "/explore/",
+  "scripts": "/scripts/",
+  "languages": "/languages/",
+  "posters": "/posters/",
+  "charter": "/charter/",
+  "contribute": "/contribute/",
+  "context": "/context/",
+  "state_json": "/context/state.json",
+  "validation_prompt": "/context/VALIDATION_PROMPT.md",
+  "status_feed": "/status.json",
+  "results_page": "https://project-ilm.github.io/romenagri/"
+ },
+ "agi_stack": [
+  {
+   "layer": "L0",
+   "name": "Hardware Definition (RTL)",
+   "status": "VHDL/Verilog localized"
+  },
+  {
+   "layer": "L1",
+   "name": "Verification / Simulation",
+   "status": "UVM/SVA"
+  },
+  {
+   "layer": "L2",
+   "name": "Synthesis / Compilation",
+   "status": "OpenLane/Sky130"
+  },
+  {
+   "layer": "L3",
+   "name": "Firmware / Embedded",
+   "status": "Indic OS infra"
+  },
+  {
+   "layer": "L4",
+   "name": "Systems (C/C++/Rust/Go)",
+   "status": "HPS 6/6 via unmodified GCC-15; HindiC++ spec"
+  },
+  {
+   "layer": "L5",
+   "name": "Parallel (CUDA/OpenCL/GPU)",
+   "status": "localized"
+  },
+  {
+   "layer": "L6",
+   "name": "Distributed / Cloud / Edge / HPC",
+   "status": "localized"
+  },
+  {
+   "layer": "L7",
+   "name": "AI / ML / Deep Learning",
+   "status": "reversible substrate"
+  },
+  {
+   "layer": "L8",
+   "name": "Robotics / Embodiment",
+   "status": "LIVE: map.html, 41 languages"
+  },
+  {
+   "layer": "L9",
+   "name": "AGI / ASI alignment",
+   "status": "canonical identity"
+  }
+ ],
+ "hindic_cpp": "github.com/hindawiai/chintamani/blob/main/Hindawi/shraeni/HindiC++_SPEC.md",
+ "charter": "/charter/  (academic/technical only; national-narrative neutral; no primary sociolinguistic data; DOI-verifiable; publish/patent before PR; compatible licenses; maintainers may decline/remove non-compliant material)",
+ "how_to_contribute": "/contribute/"
 }

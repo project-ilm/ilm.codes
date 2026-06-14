@@ -1,0 +1,17 @@
+name: "Validation / Invalidation"
+description: "Independently check (or challenge) a claim. Bring evidence."
+title: "Validate: <claim>"
+labels: ["validation"]
+body:
+  - type: dropdown
+    id: kind
+    attributes: { label: "Kind", options: ["Validation (confirms)", "Invalidation (challenges)"] }
+    validations: { required: true }
+  - type: textarea
+    id: claim
+    attributes: { label: "Which claim/figure, and where on the site/repo?" }
+    validations: { required: true }
+  - type: textarea
+    id: method
+    attributes: { label: "Method + evidence (reproducible). Attach DOI/data where possible." }
+    validations: { required: true }

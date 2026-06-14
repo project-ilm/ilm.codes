@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the Charter first
+    url: https://ilm.codes/charter/
+    about: How we collaborate across borders. Academic/technical only; DOI-verifiable; compatible licenses.
+  - name: New to GitHub? Learn how to contribute
+    url: https://ilm.codes/contribute/
+    about: Concepts, learning links, and click-through AI help.

@@ -1,0 +1,31 @@
+name: "Script proposal"
+description: "Add or seed a writing-script projection table (ISO 15924 -> Devanagari hub -> Romenagri)."
+title: "Script: <name> (<ISO 15924 code>)"
+labels: ["script", "projection-table"]
+body:
+  - type: markdown
+    attributes:
+      value: "One script = one Layer-1 projection table row. The kernel never changes. See https://ilm.codes/contribute/"
+  - type: input
+    id: code
+    attributes: { label: "ISO 15924 code", placeholder: "e.g. Cher, Ethi, Mtei" }
+    validations: { required: true }
+  - type: input
+    id: name
+    attributes: { label: "Script name" }
+    validations: { required: true }
+  - type: textarea
+    id: mapping
+    attributes: { label: "Proposed Unicode -> Devanagari-hub correspondence", description: "Letter-by-letter or rule-based. Note any irreducible/ambiguous cases honestly." }
+    validations: { required: true }
+  - type: input
+    id: doi
+    attributes: { label: "DOI / citation backing the correspondence", placeholder: "Zenodo / journal / standard" }
+  - type: checkboxes
+    id: charter
+    attributes:
+      label: Charter
+      options:
+        - { label: "Academic/technical only; no primary sociolinguistic field data.", required: true }
+        - { label: "I will not change the kernel; this is an additive table.", required: true }
+        - { label: "Compatible license (GPL-3.0-or-later / CC BY 4.0).", required: true }
