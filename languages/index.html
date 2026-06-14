@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Languages — ISO 639-3</title><link rel="stylesheet" href="../registry/ilm-reg.css"></head><body>
+<div class="mig"><b>Migrating.</b> <code>ilm.codes</code> retires ~Aug 2026 &rarr; <a href="https://ilmcodes.com">ilmcodes.com</a> &middot; <a href="https://ilmcodes.net">ilmcodes.net</a></div>
+<nav><div><a href="../">&larr; ILM home</a><a href="../scripts/">Scripts</a><a href="../languages/">Languages</a><a href="../context/">Continue (AI)</a><a href="../research/">Research</a><a href="../map.html">Live demo</a></div></nav>
+<header><h1>Languages — ISO 639-3</h1><p>Every language ISO 639-3 knows of, with ILM status. Adding a language = adding keyword-registry rows; the kernel and the existing standards remain unchanged.</p></header>
+<main>
+<section><div class="grid" id="kv"><div class="kv"><b>7867</b><span>ISO 639-3 codes</span></div><div class="kv"><b>7027</b><span>living languages</span></div><div class="kv"><b>58</b><span>seeded in ILM registry</span></div></div>
+<input type="search" id="q" placeholder="filter — type a code, name, status…">
+<p class="mut">Click a column header to sort. Status: <span class="seeded">seeded</span> = a real
+ILM table/registry entry exists; <span class="encoded">encoded</span> = present in Unicode, table pending;
+<span class="pending">pending</span> = additive row to add. Raw: <a href="../registry/languages.tsv">languages.tsv</a>.</p>
+<div id="t">loading…</div></section>
+</main>
+<footer>&copy; 1993&ndash;2026 Abhishek Choudhary &middot; source: Languages — ISO 639-3 standard &middot; ilmcodes.com / ilmcodes.net</footer>
+<script>
+const COLS=["code","name","type","scope","status"];
+fetch("../registry/languages.tsv").then(r=>r.text()).then(txt=>{
+ const lines=txt.trim().split("\n"); const head=lines[0].split("\t");
+ let rows=lines.slice(1).map(l=>l.split("\t"));
+ const idx={}; head.forEach((h,i)=>idx[h]=i);
+ const statusI=idx["status"];
+ let sortCol=-1,sortDir=1;
+ function render(data){
+  let h='<table><thead><tr>'+COLS.map((c,i)=>'<th data-i="'+i+'">'+c+'</th>').join('')+'</tr></thead><tbody>';
+  for(const r of data){h+='<tr>'+COLS.map((c,i)=>{
+     let v=r[idx[c]]||''; if(c==='status')v='<span class="'+v+'">'+v+'</span>'; return '<td>'+v+'</td>';}).join('')+'</tr>';}
+  h+='</tbody></table>'; document.getElementById('t').innerHTML=h;
+  document.querySelectorAll('th').forEach(th=>th.onclick=()=>{const i=+th.dataset.i;const col=COLS[i];
+     if(sortCol===i)sortDir*=-1;else{sortCol=i;sortDir=1;}
+     data.sort((a,b)=>((a[idx[col]]||'')>(b[idx[col]]||'')?1:-1)*sortDir); render(data);});
+ }
+ function filt(){const q=document.getElementById('q').value.toLowerCase();
+   render(q?rows.filter(r=>r.join(' ').toLowerCase().includes(q)):rows);}
+ document.getElementById('q').oninput=filt; render(rows);
+ document.getElementById('count')&&(document.getElementById('count').textContent=rows.length);
+});
+</script>
+</body></html>

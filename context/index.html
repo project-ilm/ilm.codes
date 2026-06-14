@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Continuation Context (for humans and AI agents)</title>
+<link rel="stylesheet" href="../registry/ilm-reg.css">
+<link rel="alternate" type="application/json" href="state.json" title="Machine-readable project state">
+</head><body>
+<div class="mig"><b>Migrating.</b> <code>ilm.codes</code> retires ~Aug 2026 &rarr; <a href="https://ilmcodes.com">ilmcodes.com</a> &middot; <a href="https://ilmcodes.net">ilmcodes.net</a></div>
+<nav><div><a href="../">&larr; ILM home</a><a href="../scripts/">Scripts</a><a href="../languages/">Languages</a><a href="../context/">Continue (AI)</a><a href="../research/">Research</a><a href="../map.html">Live demo</a></div></nav>
+<header><h1>Continuation Context</h1>
+<p>Everything an agent needs to resume work on ILM across the AGI stack, every script and every
+language. Machine-readable mirror: <a href="state.json" style="color:#fff;text-decoration:underline">state.json</a>.</p></header>
+<main>
+
+<section><h2>If you are an AI agent, start here</h2>
+<p>ILM (Integrative Linguistic Multiscript) makes the <b>entire computing stack</b> usable in every human
+writing system and language, with a <b>fixed reversible kernel</b> (Romenagri, GPL 2003) and a
+<b>presentation + ontology</b> layer on top. Your job is to extend coverage <b>without changing the
+kernel</b>. Concretely, the next actions are:</p>
+<pre>1. Read this page and state.json.
+2. Clone the repos (see "Repository map").
+3. Pick an unmet row from the registries:
+     /scripts/    — ISO 15924, 74 of 226 coded scripts seeded
+     /languages/  — ISO 639-3, 58 of 7867 codes seeded (7027 living)
+4. For a SCRIPT: add a Unicode-&gt;Devanagari-hub projection table row (a table, not kernel code).
+5. For a LANGUAGE: add a keyword registry (construct,native_keyword,romenagri) and run the
+   langspec generator -> a localized standard doc + a compile-verified C program.
+6. Verify by EXECUTION (compile+run), report honest figures, name the kernel variant, push.</pre>
+<p>Invariant you must preserve: <b>N projection tables + 1 fixed kernel, never N&sup2;.</b> The kernel never
+changes; every new script or language is additive.</p></section>
+
+<section><h2>The architecture</h2>
+<p>Hub-and-spoke. Every script projects to a single <b>Devanagari hub</b>; the hub is parsed by the fixed
+<b>Romenagri</b> kernel into a reversible ASCII-7 canonical form. <code>Unicode &harr; ACII (ISCII-derived)
+&harr; Romenagri</code>. A maximal Romenagri phoneme is up to <b>5 Latin characters</b> (the 4&ndash;5-char
+ceiling). Reversibility is a property of the <b>grammar</b>, not the byte encoding: the same parser over an
+ISCII or a UTF-8 substrate classifies identically.</p>
+<h3>The software-engineering process (recollected)</h3>
+<pre>Localization = PRESENTATION + ONTOLOGY, not compiler reinvention.
+  - script   = Layer-1 presentation table (Unicode -> Deva hub -> Romenagri ASCII-7)
+  - language = ontology row (its own keyword -> a canonical construct)
+  - KW_IF -> C if / Python if / VHDL elsif / Rust if   (construct identity is the invariant)
+  - pipeline: native .uhin -> hincc -> Romenagri ASCII-7 -> UNMODIFIED gcc -> binary
+  - GCC / LLVM / debuggers / SCM / IDEs / libraries are UNTOUCHED
+=> the whole AGI stack (L0 RTL ... L9 alignment) localizes at ZERO engineering overhead.</pre></section>
+
+<section><h2>Full AGI stack — one substrate, every layer</h2>
+<pre>L9  AGI / ASI alignment      — modality-agnostic canonical identity
+L8  Applications / JS        — LIVE: ../map.html (41 Perso-Arabic languages)
+L7  WASM bridge              — single C kernel -> browser + systems
+L6  AI / ML substrate        — lossless byte+alphabet compression (reversible)
+L5  Distributed / GPU        — CUDA / OpenCL / MPI localized
+L4  Systems programming      — HPS: C, C++, ASM, LEX, YACC, BASIC in Devanagari -> unmodified GCC (6/6)
+L3  Firmware / OS            — Indic-language OS infrastructure
+L2  Synthesis -> GDSII       — OpenLane / Sky130
+L1  Verification             — UVM / SystemVerilog assertions
+L0  RTL                      — VHDL (IEEE-1076) / Verilog (IEEE-1800)</pre></section>
+
+<section><h2>Repository map</h2>
+<table><tr><th>repo</th><th>what</th></tr>
+<tr><td><code>github.com/project-ilm/romenagri</code></td><td>kernel (bindings/c), filters, langspec, demos, docs; results page at <a href="https://project-ilm.github.io/romenagri/">project-ilm.github.io/romenagri</a></td></tr>
+<tr><td><code>github.com/project-ilm/ilm.codes</code></td><td>this site (home, map.html live demo, research/, registry/, context/)</td></tr>
+<tr><td><code>github.com/project-ilm/legacy</code></td><td>2003&ndash;04 lineage sources (Romenagri GPL, HPS)</td></tr>
+<tr><td><code>github.com/hindawiai/chintamani</code></td><td>related kernel lineage</td></tr></table></section>
+
+<section><h2>What is measured and done</h2>
+<table><tr><th>result</th><th>figure</th></tr>
+<tr><td>Reversibility invariant (hardened 2003&ndash;04 kernel)</td><td>98.68% rev-or-canonical, 1.31% irreducible &mdash; exhaustive [a-z]&sup1;&ndash;&#8308; (475,254 strings)</td></tr>
+<tr><td>Repo bindings/c (post-guard variant)</td><td>67.62% rev-or-canonical, 2.70% crash &mdash; named honestly</td></tr>
+<tr><td>HPS systems programming</td><td>6/6 paradigms (ASM,C,C++,LEX,BASIC,YACC) compile+run in Devanagari via unmodified GCC-15</td></tr>
+<tr><td>Roman&rarr;Devanagari heuristic</td><td>100% totality, 91.56% kernel-stable (alphabet limits absorbed by the front-end)</td></tr>
+<tr><td>Perso-Arabic completeness</td><td>Arabic block 200/200 (additive; base map untouched)</td></tr>
+<tr><td>Script families enumerated</td><td>179 scripts across 9 families; Brahmic 68 deep (avg 74%); Hebrew 27/27, Syriac 22/35</td></tr>
+<tr><td>Langspec generator</td><td>language + dialect + pure idiolect each &rarr; standard doc + compiled-and-ran C</td></tr></table></section>
+
+<section><h2>The frontier — the actual gap</h2>
+<div class="grid">
+<div class="kv"><b>74 / 226</b><span>scripts seeded vs ISO 15924 coded (187 encoded in Unicode)</span></div>
+<div class="kv"><b>58 / 7867</b><span>languages seeded vs ISO 639-3 (7027 living)</span></div>
+</div>
+<p>The full lists are here, browsable and downloadable: <a href="../scripts/">/scripts/</a> (ISO 15924) and
+<a href="../languages/">/languages/</a> (ISO 639-3). Raw data: <a href="../registry/scripts.tsv">scripts.tsv</a>,
+<a href="../registry/languages.tsv">languages.tsv</a>. Beyond the ~226 coded scripts there is an
+unencoded backlog (Script Encoding Initiative; ~100+ scripts with no ISO 15924 code yet) which, with
+historical/variant forms, is the 600&ndash;700 script universe. Each is one additive table row.</p></section>
+
+<section><h2>How to run</h2>
+<pre># reproduce the kernel + localisation results (see RUNBOOK):
+#   github.com/project-ilm/romenagri/blob/main/docs/RUNBOOK.md
+# the 11jun pipeline one-shots decompress a tarball and run end-to-end:
+bash run_ilm_localisation.sh     # heuristics, all script families, langspec, results page</pre>
+<p class="mut">Deeper provenance (RTI / public funding trail) is recorded in the repo; the public face states results with technical rigor.</p></section>
+
+</main>
+<footer>&copy; 1993&ndash;2026 Abhishek Choudhary &middot; Romenagri GPL 2003 &middot; HPS 15 Aug 2004 &middot; moving to ilmcodes.com / ilmcodes.net</footer>
+</body></html>

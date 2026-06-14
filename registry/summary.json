@@ -1,0 +1,12 @@
+{
+ "scripts": {
+  "iso15924_coded": 226,
+  "unicode_encoded": 187,
+  "seeded": 74
+ },
+ "languages": {
+  "iso639_3_total": 7867,
+  "living": 7027,
+  "seeded": 58
+ }
+}

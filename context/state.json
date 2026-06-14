@@ -1,0 +1,68 @@
+{
+ "project": "ILM — Integrative Linguistic Multiscript",
+ "tagline": "canonical reversible substrate beneath every script, language and paradigm",
+ "migration": {
+  "old": "ilm.codes",
+  "retires": "~2026-08",
+  "new": [
+   "ilmcodes.com",
+   "ilmcodes.net"
+  ]
+ },
+ "invariant": "N projection tables + 1 fixed kernel, never N^2; the kernel never changes",
+ "architecture": {
+  "flow": "Unicode <-> ACII (ISCII-derived) <-> Romenagri ASCII-7",
+  "hub": "Devanagari",
+  "max_phoneme_latin_chars": 5,
+  "reversibility": "property of the grammar, not the byte encoding"
+ },
+ "se_process": [
+  "localization = presentation + ontology, not compiler reinvention",
+  "script = Layer-1 presentation table",
+  "language = ontology keyword row",
+  "KW_IF -> if (construct identity preserved)",
+  "native .uhin -> hincc -> Romenagri ASCII-7 -> unmodified gcc",
+  "GCC/LLVM/debuggers/SCM/IDEs/libraries untouched"
+ ],
+ "repos": {
+  "kernel": "github.com/project-ilm/romenagri",
+  "site": "github.com/project-ilm/ilm.codes",
+  "legacy": "github.com/project-ilm/legacy",
+  "lineage": "github.com/hindawiai/chintamani",
+  "results_page": "https://project-ilm.github.io/romenagri/"
+ },
+ "measured": {
+  "reversibility_hardened": "98.68% rev-or-canonical / 1.31% irreducible (exhaustive [a-z]^1-4)",
+  "reversibility_repo_bindings": "67.62% rev-or-canonical / 2.70% crash (post-guard variant)",
+  "hps": "6/6 paradigms compile+run in Devanagari via unmodified GCC-15",
+  "roman_heuristic": "100% totality, 91.56% kernel-stable",
+  "perso_arabic": "Arabic block 200/200 (additive)",
+  "script_families": "179 scripts / 9 families; Brahmic 68 deep avg 74%; Hebrew 27/27; Syriac 22/35",
+  "langspec": "language + dialect + pure idiolect each -> standard + compiled-and-ran C"
+ },
+ "registries": {
+  "scripts": {
+   "standard": "ISO 15924",
+   "coded": 226,
+   "unicode_encoded": 187,
+   "seeded": 74,
+   "data": "/registry/scripts.tsv",
+   "page": "/scripts/",
+   "unencoded_backlog": "Script Encoding Initiative; ~100+ scripts with no ISO 15924 code => 600-700 universe with variants/historical"
+  },
+  "languages": {
+   "standard": "ISO 639-3",
+   "total": 7867,
+   "living": 7027,
+   "seeded": 58,
+   "data": "/registry/languages.tsv",
+   "page": "/languages/"
+  }
+ },
+ "next_actions": [
+  "pick an unmet row from /scripts/ or /languages/",
+  "SCRIPT: add Unicode->Devanagari-hub projection table row (table, not kernel)",
+  "LANGUAGE: add keyword registry (construct,native_keyword,romenagri) -> langspec_gen -> standard + compiled C",
+  "verify by execution; honest figures; name the kernel variant; push"
+ ]
+}
