@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculations & proofs (nothing hidden) · ILM</title>
+<meta name="description" content="The measured results and how to reproduce them: reversibility, compression, the alphabet bound, the theorems.">
+<meta property="og:title" content="Calculations & proofs (nothing hidden) · ILM — Integrative Linguistic Multiscript">
+<meta property="og:description" content="The measured results and how to reproduce them: reversibility, compression, the alphabet bound, the theorems.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://ilm.codes/calculations/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ilm.codes/calculations/">
+<link rel="stylesheet" href="/assets/site.css">
+</head><body><main><section class="flow"><div class="wrap prose reveal">
+<h2>Calculations &amp; proofs</h2>
+<p class="lead">Nothing to hide. Here is what is measured, how, and where to reproduce it. Full derivations
+and the theorem statements live on the <a href="https://project-ilm.github.io/romenagri/">academic results page</a>
+and in the repo; this is the index.</p>
+<h3>Reversibility (name the variant)</h3>
+<table class="t"><tr><th>Variant</th><th>Result</th><th>Method</th></tr>
+<tr><td>Hardened 2003–04 kernel</td><td><b>98.68%</b> rev-or-canonical, <b>1.31%</b> irreducible</td><td>Exhaustive sweep over [a-z]¹–⁴ = 475,254 strings; round-trip str → ACII → Romenagri → ACII → str.</td></tr>
+<tr><td>Repo <code>bindings/c</code> (post-guard)</td><td>67.62% rev-or-canonical, 2.70% crash</td><td>Same harness; a reverse-parser regression vs the 2003–04 kernel, reported honestly.</td></tr></table>
+<h3>Heuristic totality (alphabet limits)</h3>
+<p>Roman→Devanagari heuristic: <b>100%</b> of [a-z]¹–³ map to Devanagari (raw kernel left 29.7% undefined +
+2.703% crash); of the heuristic image, <b>91.56%</b> is kernel-stable. The alphabet ceiling is absorbed by the
+front-end, not by changing the kernel.</p>
+<h3>Compression (lossless)</h3>
+<p>On an Indic corpus: bytes <b>1.76×</b>, alphabet <b>51 → 24</b> (≈2.12×), byte-positions <b>3×</b>; BPE merge
+gain <code>k &lt; 1</code>. Lossless because the transform is reversible (up to the irreducible floor).</p>
+<h3>Alphabet bound</h3>
+<p>The canonical inventory (ACII) is <b>|Ω| = 84</b> primitive symbols — claimed sufficient for 44+ Brahmic
+scripts; the minimality of 84 is an <em>open</em> question (stated as open, not proven).</p>
+<h3>Two layers, do not conflate</h3>
+<p><b>Keyword localization</b> (alias/<code>#define</code>-style: localized keyword → canonical construct, e.g.
+<a href="/map.html">map.html</a>, HindiC++) preserves semantics. <b>Orthographic transliteration</b> (the
+Romenagri kernel) is the reversible script layer — that is where the 98.68% lives.</p>
+<p><a class="btn" href="https://project-ilm.github.io/romenagri/">Full results &amp; theorems</a>
+<a class="btn ghost" href="/context/">Machine-readable context</a></p>
+</div></section></main>
+<script src="/assets/anim.js" data-base=""></script></body></html>

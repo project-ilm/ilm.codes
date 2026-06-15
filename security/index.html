@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security & Responsible Disclosure · ILM</title>
+<meta name="description" content="Security policy and responsible-disclosure process for Project ILM repositories.">
+<meta property="og:title" content="Security & Responsible Disclosure · ILM — Integrative Linguistic Multiscript">
+<meta property="og:description" content="Security policy and responsible-disclosure process for Project ILM repositories.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://ilm.codes/security/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ilm.codes/security/">
+<link rel="stylesheet" href="/assets/site.css">
+</head><body><main><section class="flow"><div class="wrap prose reveal">
+<h2>Security &amp; responsible disclosure</h2>
+<p>ILM is a research project served as static pages plus open-source tooling. We still take security and
+safety seriously.</p>
+<h3>Report a vulnerability</h3>
+<p>Please use <b>GitHub private security advisories</b> on the relevant repo
+(<code>Security → Report a vulnerability</code>) rather than a public issue. We aim to acknowledge within a
+reasonable time and to credit reporters who wish it.</p>
+<h3>Scope</h3>
+<ul><li>The site (<code>project-ilm/ilm.codes</code>) and the kernel/tooling repos.</li>
+<li>Supply-chain concerns (CDN, dependencies) — flag them.</li>
+<li>Out of scope: third-party hosts (GitHub, Cloudflare) — report to them directly.</li></ul>
+<h3>Hardening we ask maintainers to enable</h3>
+<ul>
+<li>Branch protection on <code>main</code> (require PR review; no force-push).</li>
+<li>Dependabot alerts + secret scanning + push protection (org-wide).</li>
+<li>2FA required for the org; least-privilege collaborator roles.</li>
+<li>Signed commits/tags for releases where feasible.</li>
+<li>CodeQL on code repos; pin GitHub Actions by SHA.</li>
+</ul>
+<p class="mut">Do not test against third-party infrastructure. No social engineering of maintainers or contributors.</p>
+</div></section></main>
+<script src="/assets/anim.js" data-base=""></script></body></html>

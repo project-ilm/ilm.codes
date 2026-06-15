@@ -20,8 +20,12 @@
  var foot = '<footer class="site"><div class="wrap">'
    + '&copy; 1993&ndash;2026 Abhishek Choudhary &middot; Romenagri GPL 2003 &middot; Hindawi Programming System 15 Aug 2004 '
    + '&middot; Project ILM<br><span class="mono" style="opacity:.7">One humanity &middot; one ontology &middot; one identity &middot; infinite expressions</span><br>'
-   + '<span style="opacity:.6">Moving to ilmcodes.com / ilmcodes.net &middot; '
-   + '<a href="'+L("/rti/")+'" style="opacity:.6">record</a></span></div></footer>';
+   + '<span style="opacity:.6">Moving to ilmcodes.com / ilmcodes.net</span><br>'
+   + '<span style="opacity:.55;font-size:.78rem">Parts of this site were drafted with AI assistance and curated by the author; verify independently &middot; '
+   + '<a href="'+L("/disclaimers/")+'" style="opacity:.7">disclaimers</a> &middot; '
+   + '<a href="'+L("/privacy/")+'" style="opacity:.7">privacy</a> &middot; '
+   + '<a href="'+L("/security/")+'" style="opacity:.7">security</a> &middot; '
+   + '<a href="'+L("/ecosystem/")+'" style="opacity:.7">ecosystem</a></span></div></footer>';
  document.body.insertAdjacentHTML("afterbegin", mig+nav);
  document.body.insertAdjacentHTML("beforeend", foot);
 

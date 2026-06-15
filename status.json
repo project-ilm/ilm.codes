@@ -55,7 +55,7 @@
   {
    "layer": "L8",
    "name": "Robotics / Embodiment",
-   "status": "LIVE: map.html, 41 languages"
+   "status": "LIVE: map.html — keyword localization in 41 languages (alias/#define-style, not the transliteration kernel)"
   },
   {
    "layer": "L9",
@@ -72,7 +72,8 @@
   "script_families": "187 enumerated / 9 families; Brahmic 72 deep avg ~73%; Hebrew 27/27; Syriac 22/35",
   "compression": "1.76x bytes; alphabet 51->24; byte-positions 3x (lossless)",
   "langspec": "language + dialect + idiolect each -> standard + compiled-and-ran C",
-  "hindic_cpp": "ISO-style HindiC++ language spec (token equivalence to C++) in hindawiai/chintamani"
+  "hindic_cpp": "ISO-style HindiC++ language spec (token equivalence to C++) in hindawiai/chintamani",
+  "map_demo": "map.html demonstrates keyword localization (localized keyword -> canonical JS keyword, executed). Distinct from the Romenagri orthographic transliteration kernel (the 98.68% result)."
  },
  "constructs_ontology": "10,000+ (extensible)",
  "langspec_languages_implemented": "68+",

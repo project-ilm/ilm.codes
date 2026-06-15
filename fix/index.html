@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Help us fix it (apology + FIX-BLOCK) · ILM</title>
+<meta name="description" content="We will get things wrong. An unconditional apology, and a machine-readable format to report and fix issues.">
+<meta property="og:title" content="Help us fix it (apology + FIX-BLOCK) · ILM — Integrative Linguistic Multiscript">
+<meta property="og:description" content="We will get things wrong. An unconditional apology, and a machine-readable format to report and fix issues.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://ilm.codes/fix/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ilm.codes/fix/">
+<link rel="stylesheet" href="/assets/site.css">
+</head><body><main><section class="flow"><div class="wrap prose reveal">
+<h2>Help us fix it</h2>
+<p class="lead">We will get things wrong — a wrong figure, a clumsy mapping, a script we misfiled, a claim
+that reads stronger than the evidence. <b>For any error here, an unconditional apology.</b> The right
+response to a mistake is to fix it in the open.</p>
+<h3>Please do two things</h3>
+<ol><li><b>Open an issue</b> describing it (use the templates), and</li>
+<li>if you can, <b>send a pull request</b> with the fix. Even a one-line correction is welcome and credited.</li></ol>
+<p><a class="btn" href="https://github.com/project-ilm/ilm.codes/issues/new/choose">Open an issue</a>
+<a class="btn ghost" href="/contribute/">How to send a PR</a></p>
+<h3>FIX-BLOCK — a format we (and an AI) can parse and act on</h3>
+<p>Paste this in an issue or PR description; it is easy for a human or an AI agent to read and apply:</p>
+<pre>```fix
+where:   &lt;url or repo path, e.g. /scripts/ or romenagri/filters/rom2deva_heur.py&gt;
+type:    &lt;factual | figure | mapping | broken-link | wording | code | accessibility&gt;
+current: &lt;what it says now, quoted exactly&gt;
+should:  &lt;what it should say / do&gt;
+why:     &lt;evidence; DOI/source if a factual or figure fix&gt;
+variant: &lt;if a kernel figure: hardened-2003-04 | bindings/c-postguard&gt;
+```</pre>
+<p class="mut">Bring your own validators and invalidators — challenges with evidence are exactly what we want.</p>
+</div></section></main>
+<script src="/assets/anim.js" data-base=""></script></body></html>
