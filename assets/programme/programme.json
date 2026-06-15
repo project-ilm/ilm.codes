@@ -1,0 +1,80 @@
+[
+ {
+  "slug": "master-pdd",
+  "type": "Master PDD",
+  "title": "ILM — Master Programme Definition Document",
+  "abstract": "The Master Programme Definition Document defines Project ILM as a planetary-scale, federated protocol framework that enables every human language, writing system, and computational ecosystem to participate as a first-class contributor to the AGI era while preserving linguistic identity and long-term cultural continuity. It establishes the two-pillar architecture, the common protocol and interface layer, the governance and certification model, and the systems-engineering principles under which all subordinate documents are organised. It is normative for the programme: every poster, specification, reference implementation, and work package traces back to this document."
+ },
+ {
+  "slug": "pillar1-pdd",
+  "type": "Pillar I PDD",
+  "title": "Pillar I — Cultural & Cognitive Preservation (PDD)",
+  "abstract": "Pillar I specifies the federated scientific infrastructure for the preservation, formalization, and computational representation of human linguistic knowledge — every language, dialect, idiolect, and script — at fine geographic and cognitive resolution. It defines the research lifecycle (observe, document, validate, represent, formalize, publish, version, revalidate, continuously improve), the data model, the privacy-by-design federation, and the canonical computational identity into which all preserved knowledge is mapped. Pillar I preserves knowledge; it does not, by itself, compute with it."
+ },
+ {
+  "slug": "pillar2-pdd",
+  "type": "Pillar II PDD",
+  "title": "Pillar II — Computational Capability Infrastructure (PDD)",
+  "abstract": "Pillar II specifies a computational infrastructure in which every human language and writing system can serve as a first-class medium for designing, implementing, verifying, executing, and maintaining complete computational systems across the entire stack — from hardware description (L0) through firmware, operating systems, languages, toolchains, distributed and high-performance computing, AI, robotics, and AGI (L9) — without loss of computational identity or interoperability. Its engineering objective is maximum reuse of existing ecosystems with minimum modification: protocol before implementation, identity preservation before rendering."
+ },
+ {
+  "slug": "two-pillar-relationship",
+  "type": "Architecture",
+  "title": "The Two-Pillar Relationship — the Civilizational Knowledge Cycle",
+  "abstract": "This document defines the relationship between the two pillars as a continuous civilizational knowledge cycle: preserve, compute, create, reintegrate. Neither pillar is subordinate to or complete without the other; they are coupled through a common canonical computational identity and protocol layer, making the relationship cyclic, symbiotic, and co-dependent rather than hierarchical. Every computational artefact produced by Pillar II re-enters humanity's evolving cultural and scientific corpus and therefore re-enters Pillar I."
+ },
+ {
+  "slug": "vision-protocol",
+  "type": "Vision",
+  "title": "ILM — A Protocol Framework for Linguistic Equity in AGI",
+  "abstract": "This document presents the high-level vision and foundational principles of Project ILM as a protocol framework — not a product, programming language, or localization layer — for achieving linguistic equity in the age of artificial general intelligence. It shifts the question from 'can machines read our language?' to 'can we build entire computational worlds in our language?', and asserts linguistic sovereignty, computational invariance, full-stack expressivity, plurality of cognition, openness, and community-centric stewardship as its governing principles."
+ },
+ {
+  "slug": "scope-stack",
+  "type": "Scope",
+  "title": "Universal Computational Infrastructure — Scope (L0–L9)",
+  "abstract": "This document delimits the complete scope of Project ILM: every human language, every writing system and orthographic variant, every dialect and sociolect at a target resolution of approximately two kilometres, and localized realizations of every class of programming language across the full computing stack from hardware definition to advanced cognitive systems. It states the canonical computational identity layer that remains invariant under script, orthography, transliteration, encoding, and storage, and fixes the one-sentence scope definition for the entire programme."
+ },
+ {
+  "slug": "research-agenda",
+  "type": "Research",
+  "title": "A Global Research Agenda for Linguistics Departments",
+  "abstract": "This document invites linguistics departments worldwide to contribute their core scientific expertise — the study of human language — within a federated, protocol-compliant framework, through fourteen independently pursuable research work packages spanning language characterization, dialect and phonological documentation, morphology, syntax, semantics, pragmatics, terminology, lexicography, script and transliteration research, knowledge representation, corpus construction, and validation. Each institution retains ownership of its data and research; interoperability emerges through shared protocols, not centralization."
+ },
+ {
+  "slug": "pillar1-field",
+  "type": "Economics",
+  "title": "Pillar I — Planetary Preservation at 2×2 km Resolution",
+  "abstract": "This document presents Pillar I as a planetary programme to preserve human linguistic and cultural heritage at the finest practical spatial resolution, using a two-by-two-kilometre field unit as the canonical research cell, with a parametric per-unit cost model and a worked planetary estimate. The figures (on the order of US$3.25 trillion in 2026 terms, and approximately US$6.8 trillion nominal at completion over thirty years) are explicit planning estimates under stated assumptions, presented as an upper bound that the federated, amortized model is expressly designed not to incur."
+ },
+ {
+  "slug": "pillar1-privacy",
+  "type": "Governance",
+  "title": "Federated Data-Sharing & Privacy-by-Design Principles",
+  "abstract": "This document defines the minimum-data-sharing philosophy of Project ILM: exchange only the minimum information required for computational interoperability and scientific reproducibility, keep primary sociolinguistic data under local and community governance, and federate derived, protocol-compliant secondary artefacts rather than centralizing raw or sensitive data. It aligns implementations with applicable law including India's DPDP Act 2023 and the EU GDPR, and frames privacy-by-design as simultaneously an ethical obligation and an economic optimization."
+ },
+ {
+  "slug": "pillar1-amortization",
+  "type": "Economics",
+  "title": "Pillar I — Cost Amortization Framework",
+  "abstract": "This document explains how the upper-bound preservation cost is transformed into a self-sustaining global scientific infrastructure through federation, reuse, AI-assisted automation, continuous observation networks (notably healthcare and voice systems), community participation, and statistical sampling — so that the marginal cost per validated knowledge unit declines continuously while scientific and computational value compounds. Its principle: a validated observation need not be collected repeatedly by independent organisations."
+ },
+ {
+  "slug": "cost-evm",
+  "type": "Economics",
+  "title": "Complete Cost, Schedule, Earned Value & Replacement Cost",
+  "abstract": "This document provides the complete programme cost, schedule, and earned-value analysis: a thirty-year, ~US$542 billion (2026 USD) direct-and-indirect estimate across fifteen work packages, a nominal cost at completion of approximately US$1.14 trillion under stated inflation assumptions, an estimated replacement cost of existing work (US$8–20 billion / 21,000–28,600 person-years), and the remaining-programme cost after earned value. It positions ILM as a generational scientific-infrastructure investment with quantified workforce, risk, and output projections."
+ },
+ {
+  "slug": "certification",
+  "type": "Certification",
+  "title": "ILM Compatibility & Certification Automation",
+  "abstract": "This document specifies the ILM compatibility and certification model: five levels (ILM Aware, Works with ILM, Built with ILM, ILM Certified, ILM Native), an automated validation pipeline (compilation success, round-trip integrity, canonical identity, protocol conformance, project test suites) delivered as a one-line GitHub Action and a self-certification toolkit, and a public registry. Certification validates protocol conformance, not implementation choices, and self-certification is a declaration of conformance that may require independent audit in regulated environments."
+ },
+ {
+  "slug": "interpretation",
+  "type": "Reading ILM",
+  "title": "Common Interpretive Frameworks — How to Read ILM",
+  "abstract": "This document addresses the common interpretive frameworks that lead readers to misclassify ILM as merely a localization effort or a new programming language, rather than the civilization-scale computational-identity architecture it is. It catalogues six narrowing lenses (localization, programming-language, application-layer, academic-credential, history-linearity, and reductionist), names what each overlooks, and prescribes how to engage accurately: evaluate across layers, treat computational identity as the central invariant, study the full stack from RTL to AGI, recognise innovation outside the dominant canon, and judge by architecture, rigour, and empirical outcomes."
+ }
+]
