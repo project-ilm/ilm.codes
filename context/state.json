@@ -134,5 +134,13 @@
  ],
  "hindic_cpp": "github.com/hindawiai/chintamani/blob/main/Hindawi/shraeni/HindiC++_SPEC.md",
  "charter": "/charter/  (academic/technical only; national-narrative neutral; no primary sociolinguistic data; DOI-verifiable; publish/patent before PR; compatible licenses; maintainers may decline/remove non-compliant material)",
- "how_to_contribute": "/contribute/"
+ "how_to_contribute": "/contribute/",
+ "context": {
+  "rebuild": {
+   "path": "context/REBUILD.md",
+   "view": "context/rebuild.html",
+   "desc": "Consolidated pick-up point: mission, rules, architecture, full Hindawi 8-host table, repo/PR/DOI state, live correction threads, cold-rebuild procedure.",
+   "updated": "2026-06-27"
+  }
+ }
 }
