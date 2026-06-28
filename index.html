@@ -168,4 +168,6 @@ fetch("/assets/posters/manifest.json").then(r=>r.json()).then(function(m){
 }).catch(function(){});
 </script>
 <script src="/assets/anim.js" data-base=""></script>
+<script>/* fallback: reveal any .reveal section even if anim.js misses it */
+window.addEventListener("load",function(){setTimeout(function(){document.querySelectorAll(".reveal:not(.in)").forEach(function(e){e.classList.add("in")});},600);});</script>
 </body></html>
