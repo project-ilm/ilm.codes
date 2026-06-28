@@ -81,6 +81,29 @@
  </div>
 </div></section>
 
+<section class="flow" id="pubdoi"><div class="wrap reveal">
+ <h2>Publishing &amp; DOI</h2>
+ <p class="lead">Publication is the point where one canonical metadata record fans out into every format a permanent scholarly record needs — and mints a citable DOI that outlives any single platform.</p>
+ <div class="cards">
+  <div class="card"><h3 style="color:var(--acc)">One record in</h3><p>A single <span class="mono">misty.json</span> describes the work once: title, creators, license, type, keywords, related identifiers.</p></div>
+  <div class="card"><h3 style="color:var(--acc)">Many outputs out</h3><p>From it: a Zenodo deposit, a DataCite record, <span class="mono">codemeta.json</span>, <span class="mono">CITATION.cff</span>, SHA-256 checksums, and an OpenTimestamps proof — all consistent, none hand-maintained.</p></div>
+  <div class="card"><h3 style="color:var(--acc)">A permanent DOI</h3><p>The DOI resolves forever, independent of the publisher. A cryptographic timestamp fixes the artifact's existence in time. The record is yours, not a vendor's.</p></div>
+ </div>
+ <p class="lead" style="margin-top:1.2rem">The tool is <a href="https://github.com/project-ilm/misty-doi">misty-doi</a> — browser-first, CLI-first, automation-first, no backend, no lock-in. The token is read only from the environment, never stored. A published result carries the DOI, and that DOI is the single event that triggers the announcement, the community post, and the educational follow-on. One record in; many channels out.</p>
+ <p class="lead" style="margin-top:.8rem"><span class="mono">pipx install misty-doi</span> &nbsp;·&nbsp; <span class="mono">misty publish -m misty.json -f artifact</span></p>
+</div></section>
+
+<section class="flow" id="patent"><div class="wrap reveal">
+ <h2>Patent workflow</h2>
+ <p class="lead">Patent prosecution is deliberately handled as a <b>tracked, human- and counsel-reviewed</b> process — not an automated filing pipeline. The value the system adds is provenance and state-tracking, never auto-submission to a patent office.</p>
+ <div class="cards">
+  <div class="card"><h3>Provenance first</h3><p><b class="mono">Observe → Archive</b><br>Invention dates and lab records are cryptographically timestamped (OpenTimestamps) as dated evidentiary artifacts, the moment they exist — independent of any later filing.</p></div>
+  <div class="card"><h3>Prior-art &amp; drafting</h3><p><b class="mono">Acquire → Create</b><br>Prior-art search, claim drafting, and figure preparation are tracked as states, with every supporting document versioned.</p></div>
+  <div class="card"><h3>Filing &amp; office actions</h3><p><b class="mono">Approve → Maintain</b><br>Filing, office-action responses, family management, and grant tracking are status records — surfaced for review, acted on by you and counsel.</p></div>
+ </div>
+ <p class="lead" style="margin-top:1.2rem">The boundary is firm: the system holds the timeline, the documents, and the provenance; a human and qualified counsel make every filing decision. For an independent inventor running matters personally, that timeline and provenance are the leverage — the dated record is what an office, or a court, ultimately weighs.</p>
+</div></section>
+
 <section class="flow"><div class="wrap reveal">
  <h2>The same bundle feeds everything downstream</h2>
  <p class="lead">Research → development → experiment → DOI is the spine. Once an artifact is publication-worthy, a single canonical metadata record drives every output format — Zenodo deposit, DataCite, codemeta, CITATION.cff — and a single <span class="mono">result</span> with a DOI becomes the trigger for the announcement, the community post, and the educational follow-on. One record in; many channels out. That is the only point where the "experiment" and "publication" workflows need to touch.</p>
