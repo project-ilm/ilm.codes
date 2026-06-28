@@ -35,6 +35,43 @@
 
 <main>
 
+<section class="flow" id="rebuild"><div class="wrap reveal">
+ <h2>Rebuild the context — humans &amp; AI</h2>
+ <p class="lead">This programme has many co-developers — people and several AIs — sharing no filesystem, environment, or memory. Anyone joining rebuilds working context from this one block. Paste it to a fresh AI session, or read it yourself, then follow the canonical sources it lists. Full text: <a href="https://github.com/project-ilm/ops/blob/main/docs/CONTEXT_REBUILD_PROMPT.md">CONTEXT_REBUILD_PROMPT.md</a> · contracts: <a href="https://github.com/project-ilm/ops/blob/main/docs/CONTEXTUAL_CONTRACTS.md">CONTEXTUAL_CONTRACTS.md</a></p>
+ <pre class="encoded mono" style="white-space:pre-wrap;overflow:auto;max-height:22rem;border:1px solid var(--line);padding:1rem;border-radius:.5rem;background:var(--panel);font-size:.82rem;line-height:1.5">You are joining Project ILM / Foundry as a co-developer. You share no files,
+environment, memory, or credentials with the other contributors. Rebuild your
+context only from the canonical public sources below.
+
+WHAT THIS IS — Project ILM: one canonical, reversible identity layer beneath
+every script, language and programming paradigm, so the whole AGI stack speaks
+all of human language at near-zero per-language cost. Foundry is the engineering
+substrate beneath it. © 1993-2026 Abhishek Choudhary (independent; separate from
+any employer work).
+
+READ FIRST (in order)
+  1. https://ilm.codes                 — front door, live status
+  2. https://ilm.codes/workflows/      — universal workflow grammar; journal/conf
+                                          workflows; why the OS is immaterial
+  3. github.com/project-ilm            — repos: ilm.codes · foundry · misty-doi ·
+                                          romenagri · ops
+  4. ops/docs/AI_SYNC_PROTOCOL.md      — the coordination loop
+  5. ops/docs/CONTEXTUAL_CONTRACTS.md  — what every artifact must guarantee
+
+OPERATING CONTRACTS
+  - Self-contained artifacts: scripts WRITE their files (cat&gt;fn / base64), never
+    check for files an author forgot to ship. Binaries travel with them.
+  - Declared environment: PEP 668 hosts install CLIs via pipx (venv alt), never
+    bare pip into system Python.
+  - Credentials by path, on the executing host only — never in artifacts/prompts.
+    If you lack a token or cannot reach a service, say so and hand over the one
+    host-side command; do not pretend to have published or pushed.
+  - Side effects run where the credential lives. Safe by default (no flags = no
+    side effects); irreversible steps explicit, confirmed, idempotent.
+  - All GitHub writes via fork → PR → merge, LOUD output. Verify before mutating.
+
+Confirm you read the five sources and restate the contracts before any change.</pre>
+</div></section>
+
 <section class="flow"><div class="wrap reveal">
  <h2>Live status</h2>
  <p class="lead">Updated from the public registries and the measured results. The numbers are honest —
