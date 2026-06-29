@@ -1,0 +1,335 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Convergence Map · 457 repos across 94 namespaces</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* self-contained, content visible by default — no reveal/JS dependency */
+:root{--ink:#0a0e27;--ink2:#0e1430;--panel:#141a3a;--line:#26305c;--acc:#d4a843;--acc2:#e8c46a;--mut:#9aa4d4;--cy:#5ad0e0}
+body{margin:0;background:var(--ink);color:#e8ecff;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:2.2rem 1.3rem}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:.2rem 0}
+h1 b{color:var(--acc)}
+.sub{color:var(--mut);margin:.3rem 0 1.6rem}
+h2{font-size:1.5rem;margin:2.4rem 0 1rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;margin:1.2rem 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+.stat .v{font-size:2rem;font-weight:700;color:var(--acc2)}
+.stat .l{color:var(--mut);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+.legend{display:flex;gap:1.4rem;color:var(--mut);font-size:.9rem;margin:.4rem 0 1rem}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:.4rem}
+.nsrow{display:grid;grid-template-columns:170px 1fr;gap:.6rem;align-items:center;margin:.32rem 0}
+.nslabel{font-family:ui-monospace,monospace;font-size:.86rem;display:flex;justify-content:space-between;color:#cdd4f5}
+.nscount{color:var(--acc)}
+.nsbar{height:18px;background:#0c1230;border-radius:6px;overflow:hidden;display:flex;min-width:4px}
+.seg{display:block;height:100%}
+.seg.orig{background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.seg.fork{background:#33407a}
+.nsmeta{grid-column:2;font-size:.74rem;color:var(--mut);margin-top:-2px}
+.dupgrp{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--cy);border-radius:10px;padding:.7rem .9rem;margin:.5rem 0}
+.dupname{font-family:ui-monospace,monospace;color:#cdd4f5;font-weight:600}
+.dupn{color:var(--cy)}
+.chips{margin-top:.4rem;display:flex;flex-wrap:wrap;gap:.3rem}
+.chip{background:#0c1230;border:1px solid var(--line);border-radius:6px;padding:.12rem .5rem;font-family:ui-monospace,monospace;font-size:.76rem;color:var(--mut)}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem}
+.bucket{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.bucket h3{margin:.1rem 0 .4rem;color:var(--acc)}
+.bucket p{color:var(--mut);font-size:.9rem;margin:0}
+.note{color:var(--mut);font-size:.9rem;background:#0c1230;border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;margin:1rem 0}
+</style></head>
+<body><div class="wrap">
+<h1>Convergence <b>Map</b></h1>
+<div class="sub">Generated from the live inventory — 457 repositories across 94 namespaces. Originals vs forks, name collisions, and the target structure.</div>
+
+<div class="dash">
+  <div class="stat"><div class="v">457</div><div class="l">repos</div></div>
+  <div class="stat"><div class="v">94</div><div class="l">namespaces</div></div>
+  <div class="stat"><div class="v">190</div><div class="l">original</div></div>
+  <div class="stat"><div class="v">267</div><div class="l">forks (58%)</div></div>
+  <div class="stat"><div class="v">418</div><div class="l">stale &gt;1y</div></div>
+  <div class="stat"><div class="v">27</div><div class="l">name collisions</div></div>
+  <div class="stat"><div class="v">114</div><div class="l">site candidates</div></div>
+</div>
+
+<h2>Namespaces — mass, and how much is borrowed</h2>
+<div class="legend"><span><span class="swatch" style="background:linear-gradient(90deg,#d4a843,#e8c46a)"></span>original</span><span><span class="swatch" style="background:#33407a"></span>fork</span></div>
+<div class="nsrow">
+      <div class="nslabel">health2030<span class="nscount">115</span></div>
+      <div class="nsbar" style="width:100.0%">
+        <span class="seg orig" style="width:2.6%" title="3 original"></span>
+        <span class="seg fork" style="width:97.4%" title="112 forks"></span>
+      </div>
+      <div class="nsmeta">3orig · 112fork · 115stale · 1GB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayeai<span class="nscount">43</span></div>
+      <div class="nsbar" style="width:37.4%">
+        <span class="seg orig" style="width:37.2%" title="16 original"></span>
+        <span class="seg fork" style="width:62.8%" title="27 forks"></span>
+      </div>
+      <div class="nsmeta">16orig · 27fork · 43stale · 1GB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">obonac<span class="nscount">34</span></div>
+      <div class="nsbar" style="width:29.6%">
+        <span class="seg orig" style="width:26.5%" title="9 original"></span>
+        <span class="seg fork" style="width:73.5%" title="25 forks"></span>
+      </div>
+      <div class="nsmeta">9orig · 25fork · 28stale · 267MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">project-ilm<span class="nscount">27</span></div>
+      <div class="nsbar" style="width:23.5%">
+        <span class="seg orig" style="width:92.6%" title="25 original"></span>
+        <span class="seg fork" style="width:7.4%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">25orig · 2fork · 12stale · 280MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">hindawiai<span class="nscount">23</span></div>
+      <div class="nsbar" style="width:20.0%">
+        <span class="seg orig" style="width:43.5%" title="10 original"></span>
+        <span class="seg fork" style="width:56.5%" title="13 forks"></span>
+      </div>
+      <div class="nsmeta">10orig · 13fork · 22stale · 4GB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayecnse<span class="nscount">15</span></div>
+      <div class="nsbar" style="width:13.0%">
+        <span class="seg orig" style="width:100.0%" title="15 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">15orig · 0fork · 0stale · 39MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">projectvastra<span class="nscount">11</span></div>
+      <div class="nsbar" style="width:9.6%">
+        <span class="seg orig" style="width:100.0%" title="11 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">11orig · 0fork · 11stale · 190KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayevdi<span class="nscount">9</span></div>
+      <div class="nsbar" style="width:7.8%">
+        <span class="seg orig" style="width:66.7%" title="6 original"></span>
+        <span class="seg fork" style="width:33.3%" title="3 forks"></span>
+      </div>
+      <div class="nsmeta">6orig · 3fork · 9stale · 67MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">HIT-Tools<span class="nscount">7</span></div>
+      <div class="nsbar" style="width:6.1%">
+        <span class="seg orig" style="width:57.1%" title="4 original"></span>
+        <span class="seg fork" style="width:42.9%" title="3 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 3fork · 6stale · 187MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayeinterns<span class="nscount">6</span></div>
+      <div class="nsbar" style="width:5.2%">
+        <span class="seg orig" style="width:83.3%" title="5 original"></span>
+        <span class="seg fork" style="width:16.7%" title="1 forks"></span>
+      </div>
+      <div class="nsmeta">5orig · 1fork · 6stale · 24MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayelearn<span class="nscount">6</span></div>
+      <div class="nsbar" style="width:5.2%">
+        <span class="seg orig" style="width:83.3%" title="5 original"></span>
+        <span class="seg fork" style="width:16.7%" title="1 forks"></span>
+      </div>
+      <div class="nsmeta">5orig · 1fork · 6stale · 79MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">covid-tools<span class="nscount">6</span></div>
+      <div class="nsbar" style="width:5.2%">
+        <span class="seg orig" style="width:100.0%" title="6 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">6orig · 0fork · 6stale · 66KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">gsfcore<span class="nscount">6</span></div>
+      <div class="nsbar" style="width:5.2%">
+        <span class="seg orig" style="width:66.7%" title="4 original"></span>
+        <span class="seg fork" style="width:33.3%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 2fork · 6stale · 153MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayevh<span class="nscount">5</span></div>
+      <div class="nsbar" style="width:4.3%">
+        <span class="seg orig" style="width:60.0%" title="3 original"></span>
+        <span class="seg fork" style="width:40.0%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">3orig · 2fork · 5stale · 457MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">lawmitra<span class="nscount">5</span></div>
+      <div class="nsbar" style="width:4.3%">
+        <span class="seg orig" style="width:40.0%" title="2 original"></span>
+        <span class="seg fork" style="width:60.0%" title="3 forks"></span>
+      </div>
+      <div class="nsmeta">2orig · 3fork · 5stale · 787MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">projectvikram<span class="nscount">5</span></div>
+      <div class="nsbar" style="width:4.3%">
+        <span class="seg orig" style="width:20.0%" title="1 original"></span>
+        <span class="seg fork" style="width:80.0%" title="4 forks"></span>
+      </div>
+      <div class="nsmeta">1orig · 4fork · 5stale · 49MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ai4you<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:50.0%" title="2 original"></span>
+        <span class="seg fork" style="width:50.0%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">2orig · 2fork · 4stale · 840KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayeatros<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:100.0%" title="4 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 0fork · 4stale · 16KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayeconsult<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:100.0%" title="4 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 0fork · 4stale · 674MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">gsfvikram<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:0.0%" title="0 original"></span>
+        <span class="seg fork" style="width:100.0%" title="4 forks"></span>
+      </div>
+      <div class="nsmeta">0orig · 4fork · 4stale · 47MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">NeuroMusical<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:50.0%" title="2 original"></span>
+        <span class="seg fork" style="width:50.0%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">2orig · 2fork · 3stale · 24MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">shaensha<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:100.0%" title="4 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 0fork · 4stale · 0KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">validcv<span class="nscount">4</span></div>
+      <div class="nsbar" style="width:3.5%">
+        <span class="seg orig" style="width:100.0%" title="4 original"></span>
+        <span class="seg fork" style="width:0.0%" title="0 forks"></span>
+      </div>
+      <div class="nsmeta">4orig · 0fork · 4stale · 247KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ai4hc<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:0.0%" title="0 original"></span>
+        <span class="seg fork" style="width:100.0%" title="3 forks"></span>
+      </div>
+      <div class="nsmeta">0orig · 3fork · 3stale · 34MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayeblas<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:33.3%" title="1 original"></span>
+        <span class="seg fork" style="width:66.7%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">1orig · 2fork · 3stale · 28MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayepages<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:33.3%" title="1 original"></span>
+        <span class="seg fork" style="width:66.7%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">1orig · 2fork · 3stale · 84MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayepreet<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:33.3%" title="1 original"></span>
+        <span class="seg fork" style="width:66.7%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">1orig · 2fork · 3stale · 12MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayerunner<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:33.3%" title="1 original"></span>
+        <span class="seg fork" style="width:66.7%" title="2 forks"></span>
+      </div>
+      <div class="nsmeta">1orig · 2fork · 3stale · 38MB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">ayetalk<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:66.7%" title="2 original"></span>
+        <span class="seg fork" style="width:33.3%" title="1 forks"></span>
+      </div>
+      <div class="nsmeta">2orig · 1fork · 3stale · 17KB</div>
+    </div>
+<div class="nsrow">
+      <div class="nslabel">kaivalya-quest<span class="nscount">3</span></div>
+      <div class="nsbar" style="width:2.6%">
+        <span class="seg orig" style="width:66.7%" title="2 original"></span>
+        <span class="seg fork" style="width:33.3%" title="1 forks"></span>
+      </div>
+      <div class="nsmeta">2orig · 1fork · 3stale · 16MB</div>
+    </div>
+<div class="note">Forks are <b>58%</b> of everything. Segregating them behind one topic is the single biggest legibility win — it collapses more than half the surface without touching original work.</div>
+
+<h2>Name collisions — the 27 convergence targets</h2>
+<div class="sub">Same normalized name in more than one place. For each: pick one canonical, archive/redirect the rest.</div>
+<div class="dupgrp"><div class="dupname">icd102018 <span class="dupn">×17</span></div><div class="chips"><span class="chip">DrAdvaita/icd10_2018</span><span class="chip">HIT-Tools/icd10_2018</span><span class="chip">ai4hc/icd10_2018</span><span class="chip">biotech-repo/icd10_2018</span><span class="chip">blendedreality/icd10_2018</span><span class="chip">charak-repo/icd10_2018</span><span class="chip">convdiag/icd10_2018</span><span class="chip">genetics-repo/icd10_2018</span><span class="chip">health4all/icd10_2018</span><span class="chip">homeo-repo/icd10_2018</span><span class="chip">iot-repo/icd10_2018</span><span class="chip">nanotech-repo/icd10_2018</span><span class="chip">nursing-repo/icd10_2018</span><span class="chip">paramed-repo/icd10_2018</span><span class="chip">pharma-repo/icd10_2018</span><span class="chip">physiotherapy-repo/icd10_2018</span><span class="chip">udhc-journals/icd10_2018</span></div></div>
+<div class="dupgrp"><div class="dupname">ayevdi <span class="dupn">×4</span></div><div class="chips"><span class="chip">ayeai/ayevdi</span><span class="chip">ayeque/ayevdi</span><span class="chip">ayevdi/ayevdi</span><span class="chip">obonac/ayevdi</span></div></div>
+<div class="dupgrp"><div class="dupname">healthcare <span class="dupn">×4</span></div><div class="chips"><span class="chip">ayevh/healthcare</span><span class="chip">gsfcore/healthcare</span><span class="chip">gsfvikram/healthcare</span><span class="chip">projectvikram/healthcare</span></div></div>
+<div class="dupgrp"><div class="dupname">ayepagesgithubio <span class="dupn">×3</span></div><div class="chips"><span class="chip">aclegacy/ayepages.github.io</span><span class="chip">apothecurry/ayepages.github.io</span><span class="chip">ayepages/ayepages.github.io</span></div></div>
+<div class="dupgrp"><div class="dupname">education <span class="dupn">×3</span></div><div class="chips"><span class="chip">gsfcore/education</span><span class="chip">gsfvikram/education</span><span class="chip">projectvikram/education</span></div></div>
+<div class="dupgrp"><div class="dupname">hindawi2016 <span class="dupn">×3</span></div><div class="chips"><span class="chip">Hindawipython/hindawi2016</span><span class="chip">python-hindawi/hindawi2016</span><span class="chip">telugu-hindawi/hindawi2016</span></div></div>
+<div class="dupgrp"><div class="dupname">enrolltools <span class="dupn">×2</span></div><div class="chips"><span class="chip">ai4hc/enroll-tools</span><span class="chip">covid-tools/enroll-tools</span></div></div>
+<div class="dupgrp"><div class="dupname">telemedcourses <span class="dupn">×2</span></div><div class="chips"><span class="chip">ai4hc/telemed-courses</span><span class="chip">covid-tools/telemed-courses</span></div></div>
+<div class="dupgrp"><div class="dupname">apothecurrygithubio <span class="dupn">×2</span></div><div class="chips"><span class="chip">apothecurry/apothecurry.github.io</span><span class="chip">obonac/apothecurry.github.io</span></div></div>
+<div class="dupgrp"><div class="dupname">kodexplorer <span class="dupn">×2</span></div><div class="chips"><span class="chip">ayeai/KodExplorer</span><span class="chip">ayevdi/KodExplorer</span></div></div>
+<div class="dupgrp"><div class="dupname">runtimetools <span class="dupn">×2</span></div><div class="chips"><span class="chip">ayeai/runtime-tools</span><span class="chip">obonac/runtime-tools</span></div></div>
+<div class="dupgrp"><div class="dupname">blastester <span class="dupn">×2</span></div><div class="chips"><span class="chip">ayeblas/BLAS-Tester</span><span class="chip">obonac/BLAS-Tester</span></div></div>
+<div class="dupgrp"><div class="dupname">tuieditor <span class="dupn">×2</span></div><div class="chips"><span class="chip">ayepages/tui.editor</span><span class="chip">obonac/tui.editor</span></div></div>
+<div class="dupgrp"><div class="dupname">chintamani <span class="dupn">×2</span></div><div class="chips"><span class="chip">ayerunner/chintamani</span><span class="chip">hindawiai/chintamani</span></div></div>
+<div class="dupgrp"><div class="dupname">digihealthindiagithubio <span class="dupn">×2</span></div><div class="chips"><span class="chip">digihealthindia/digihealthindia.github.io</span><span class="chip">obonac/digihealthindia.github.io</span></div></div>
+<div class="dupgrp"><div class="dupname">services <span class="dupn">×2</span></div><div class="chips"><span class="chip">flickerro/services</span><span class="chip">obonac/services</span></div></div>
+<div class="dupgrp"><div class="dupname">gsftheme <span class="dupn">×2</span></div><div class="chips"><span class="chip">gsfcore/gsftheme</span><span class="chip">gsfvikram/gsftheme</span></div></div>
+<div class="dupgrp"><div class="dupname">demorepository <span class="dupn">×2</span></div><div class="chips"><span class="chip">NeuroMusical/demo-repository</span><span class="chip">health2030/demo-repository</span></div></div>
+<div class="dupgrp"><div class="dupname">practice <span class="dupn">×2</span></div><div class="chips"><span class="chip">hindawiai/practice</span><span class="chip">obonac/practice</span></div></div>
+<div class="dupgrp"><div class="dupname">autogit <span class="dupn">×2</span></div><div class="chips"><span class="chip">hindawiai/autogit</span><span class="chip">obonac/autogit</span></div></div>
+<div class="dupgrp"><div class="dupname">legacy <span class="dupn">×2</span></div><div class="chips"><span class="chip">hindawi-farsi/legacy</span><span class="chip">project-ilm/legacy</span></div></div>
+<div class="dupgrp"><div class="dupname">cpython <span class="dupn">×2</span></div><div class="chips"><span class="chip">Hindawipython/cpython</span><span class="chip">python-hindawi/cpython</span></div></div>
+<div class="dupgrp"><div class="dupname">neuromusicalgithubio <span class="dupn">×2</span></div><div class="chips"><span class="chip">NeuroMusical/NeuroMusical.github.io</span><span class="chip">obonac/NeuroMusical.github.io</span></div></div>
+<div class="dupgrp"><div class="dupname">brainmodel <span class="dupn">×2</span></div><div class="chips"><span class="chip">NeuroMusical/BrainModel</span><span class="chip">obonac/BrainModel</span></div></div>
+<div class="dupgrp"><div class="dupname">ops <span class="dupn">×2</span></div><div class="chips"><span class="chip">obonac/ops</span><span class="chip">project-ilm/ops</span></div></div>
+<div class="dupgrp"><div class="dupname">ilmcodes <span class="dupn">×2</span></div><div class="chips"><span class="chip">obonac/ilm.codes</span><span class="chip">project-ilm/ilm.codes</span></div></div>
+<div class="dupgrp"><div class="dupname">foundry <span class="dupn">×2</span></div><div class="chips"><span class="chip">obonac/foundry</span><span class="chip">project-ilm/foundry</span></div></div>
+
+<h2>Target structure</h2>
+<div class="buckets">
+  <div class="bucket"><h3>ILM Core</h3><p>The reversible-identity layer stack + language assets.</p></div>
+  <div class="bucket"><h3>ILM Tooling</h3><p>misty-doi, spi-scan, foundry, ops, the workflow engines.</p></div>
+  <div class="bucket"><h3>Site &amp; Docs</h3><p>One canonical site; archive duplicate Pages repos.</p></div>
+  <div class="bucket"><h3>Products</h3><p>AyeAI / health2030 / vastra applied systems.</p></div>
+  <div class="bucket"><h3>Vendored Forks</h3><p>All 267 forks, tagged, clearly "borrowed not ours".</p></div>
+</div>
+</div></body></html>
