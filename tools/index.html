@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILM — Tools you can install and run</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+body{margin:0;background:#0a0e27;color:#e8ecff;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:2.2rem 1.3rem}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:.2rem 0}h1 b{color:#d4a843}
+.sub{color:#9aa4d4;margin:.3rem 0 1.8rem}
+.tool{background:#141a3a;border:1px solid #26305c;border-radius:14px;padding:1.3rem 1.4rem;margin:1.1rem 0}
+.tool h2{margin:.1rem 0 .3rem;font-size:1.35rem;color:#e8c46a}
+.tool .what{color:#cdd4f5;margin:.2rem 0 .8rem}
+.tool pre{background:#0c1230;border:1px solid #26305c;border-radius:9px;padding:.8rem 1rem;overflow:auto;margin:.5rem 0}
+.tool code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;color:#9be8c4}
+.tag{display:inline-block;background:#0c1230;border:1px solid #26305c;border-radius:6px;padding:.1rem .5rem;font-size:.72rem;color:#9aa4d4;margin-right:.3rem}
+a{color:#d4a843}
+.banner{background:#0c1230;border:1px solid #26305c;border-left:3px solid #5ad0e0;border-radius:10px;padding:.8rem 1rem;color:#9aa4d4;font-size:.92rem;margin:1rem 0}
+</style></head>
+<body><div class="wrap">
+<h1>Tools — <b>install and run</b></h1>
+<div class="sub">Project ILM tooling, released for anyone. Every command below is the one that actually works. See the <a href="/convergence-map/">convergence map</a> for the repo landscape, and <a href="/workflows/">workflows</a> for how they chain.</div>
+
+<div class="tool">
+  <span class="tag">PyPI</span><span class="tag">DOI</span>
+  <h2>misty-doi</h2>
+  <div class="what">Automation-first DOI minting — one canonical metadata record fans out to Zenodo/DataCite/codemeta/CITATION.cff, with OpenTimestamps provenance. No backend, no lock-in.</div>
+  <pre><code>pipx install misty-doi
+misty init -o metadata.json
+misty publish -m metadata.json -f paper.pdf      # --dry-run / --sandbox / production</code></pre>
+  <a href="https://github.com/project-ilm/misty-doi">repo</a> · <a href="https://pypi.org/project/misty-doi/">PyPI</a>
+</div>
+
+<div class="tool">
+  <span class="tag">git install</span><span class="tag">SPI / secrets</span>
+  <h2>spi-scan</h2>
+  <div class="what">Sensitive-Personal-Information scanner for a working tree, full git history, and GitHub metadata: emails, AWS/GCP keys, GitHub PATs, PyPI/Zenodo/Slack tokens, private keys, JWTs, phones, IPs, home paths, Aadhaar, cards, passports. Exit 7 on any HIGH finding. Run it before transferring or open-sourcing anything.</div>
+  <pre><code># installs from git (not yet on PyPI):
+pipx install git+https://github.com/project-ilm/spi-scan.git
+spi-scan path ./repo          # working tree
+spi-scan git  ./repo          # full history, all branches
+spi-scan gh   owner/repo      # issues, PRs, releases
+spi-scan all  ./repo owner/repo</code></pre>
+  <a href="https://github.com/project-ilm/spi-scan">repo</a>
+</div>
+
+<div class="tool">
+  <span class="tag">ops</span><span class="tag">publishing</span><span class="tag">patent</span>
+  <h2>Workflow engines</h2>
+  <div class="what">The actual publish and patent workflows, built on misty-doi. Each item is a tracked directory with a status ledger.</div>
+  <pre><code># in project-ilm/ops/bin
+publish_paper.sh new my-paper        # init -> validate -> stamp -> doi -> submission -> track
+patent_track.sh  new my-invention    # disclosure -> OTS proof -> prior-art -> filing package (counsel files)</code></pre>
+  <a href="https://github.com/project-ilm/ops">project-ilm/ops</a>
+</div>
+
+<div class="tool">
+  <span class="tag">ops</span><span class="tag">convergence</span><span class="tag">resilience</span>
+  <h2>Convergence &amp; resilience toolchain</h2>
+  <div class="what">Discover every org/repo, generate a convergence plan from real data, dedupe locally, gate for SPI before announcing, mirror across forges, and keep it all running.</div>
+  <pre><code># in project-ilm/ops/bin
+discover_all.sh                      # enumerate all orgs/repos -> inventory + plan
+dedupe_scan.sh ~/work                # duplicate files (report-only)
+pre_announce_scan.sh --org project-ilm   # SPI go/no-go before announcing
+mirror_forges.sh --org project-ilm   # GitLab/Codeberg/Savannah/OpenForge mirrors
+convergence_driver.sh --watch 6      # run the whole sweep continuously</code></pre>
+  <a href="https://github.com/project-ilm/ops">project-ilm/ops</a>
+</div>
+
+<div class="banner">All tools © 1993–2026 Abhishek Choudhary, GPL-3.0-or-later. Project-neutral; released for anyone to use.</div>
+</div></body></html>
