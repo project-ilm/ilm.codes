@@ -1,0 +1,21 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "project-ilm/ilm.codes",
+      "digest": {
+        "sha1": "6817502"
+      }
+    }
+  ],
+  "predicateType": "https://project-ilm.org/attestations/candor/v1",
+  "predicate": {
+    "action": "PUSH",
+    "reason": "fix seed",
+    "utc": "2026-07-24T14:57:28.620368Z",
+    "actor": "human, typed at the terminal",
+    "tool": "seed_pwa.sh",
+    "ayesha1": null,
+    "copyright": "© 1993–2026 Abhishek Choudhary. All rights reserved."
+  }
+}
