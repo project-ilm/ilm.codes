@@ -1,0 +1,14 @@
+{
+  "_copyright": "© 1993–2026 Abhishek Choudhary. All rights reserved.",
+  "title": "ILM — Integrative Linguistic Multiscript",
+  "short": "ILM",
+  "text": "Project ILM: the entire computing stack in every human script and language, over one fixed reversible kernel. Linguistic equity, identity preservation, reversibility, ecosystem reuse.",
+  "bg": "#05060f",
+  "fg": "#d4a843",
+  "hashKey": "s",
+  "sw": "sw.js",
+  "whatsapp": true,
+  "card": true,
+  "stamp": true,
+  "installHint": true
+}
