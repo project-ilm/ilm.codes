@@ -39,3 +39,11 @@ That snapshot does not constitute a release, publication, or representation of P
 Project ILM makes no representations or assertions through archived intermediary artifacts that are outside the current repository state. The present repository content alone constitutes the complete, authoritative, and intended implementation of Project ILM.
 
 Any interpretation, inference, or reliance on superseded trial artifacts is expressly disclaimed.
+
+<!-- trademarks:begin -->
+---
+AyeAI®, AyeCNSe® and AyeAM® are registered trademarks of Abhishek Choudhary in India, used and claimed worldwide since
+2019. The names of his products and projects are his trademarks; see [legal/TRADEMARKS.md](legal/TRADEMARKS.md). Code
+licences in this repository grant copyright permissions only and no right in any mark.
+© 1993–2026 Abhishek Choudhary. All rights reserved. AyeAI.
+<!-- trademarks:end -->
